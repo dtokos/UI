@@ -1,15 +1,9 @@
-//
-//  main.cpp
-//  Assignment-2
-//
-//  Created by dtokos on 07/03/2020.
-//  Copyright © 2020 dtokos. All rights reserved.
-//
-
 #include <iostream>
+#include "./Heuristics.hpp"
+
+using namespace std;
 
 int main(int argc, const char * argv[]) {
-	// insert code here...
-	std::cout << "Hello, World!\n";
+	cout << "Hello, World!\n";
 	return 0;
 }
