@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./Heuristics.hpp"
+#include "./Solver.hpp"
 
 using namespace std;
 

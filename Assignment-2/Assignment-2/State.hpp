@@ -2,6 +2,7 @@
 #define State_hpp
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -10,9 +11,10 @@ public:
 	struct Size {
 		const int width, height;
 		
-		bool operator ==(const Size &b) const {
-			return width == b.width && height == b.height;
-		}
+		bool operator ==(const Size &b) const {return width == b.width && height == b.height;}
+		bool operator !=(const Size &b) const {return width != b.width || height != b.height;}
+		
+		string toString() const {return "(" + to_string(width) + ", " + to_string(height) + ")";}
 	};
 	
 	State(Size size, vector<int> tiles) : size(size), tiles(tiles) {}

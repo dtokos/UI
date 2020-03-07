@@ -15,6 +15,12 @@
 	XCTAssertFalse(s1 == s3);
 }
 
+-(void)testSizeToString {
+	State::Size s1{5, 10};
+	XCTAssertEqual("(5, 10)", s1.toString());
+}
+
+
 -(void)testStateEquality {
 	State s1{{5, 10}, {1, 2, 3}};
 	State s2{{5, 10}, {1, 2, 3}};

@@ -10,6 +10,7 @@
 		98367E8324143D9E00D8AE61 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98367E8224143D9E00D8AE61 /* main.cpp */; };
 		98367E9E2414410E00D8AE61 /* TestState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9D2414410E00D8AE61 /* TestState.mm */; };
 		98367EA0241445A100D8AE61 /* TestHeuristics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9F241445A100D8AE61 /* TestHeuristics.mm */; };
+		98367EA62414572100D8AE61 /* TestSolver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367EA52414572100D8AE61 /* TestSolver.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,8 @@
 		98367E9A24143F3500D8AE61 /* State.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = State.hpp; sourceTree = "<group>"; };
 		98367E9D2414410E00D8AE61 /* TestState.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestState.mm; sourceTree = "<group>"; };
 		98367E9F241445A100D8AE61 /* TestHeuristics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestHeuristics.mm; sourceTree = "<group>"; };
+		98367EA22414547B00D8AE61 /* Solver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Solver.hpp; sourceTree = "<group>"; };
+		98367EA52414572100D8AE61 /* TestSolver.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestSolver.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,7 @@
 				98367E8224143D9E00D8AE61 /* main.cpp */,
 				98367E9624143EE800D8AE61 /* Heuristics.hpp */,
 				98367E9A24143F3500D8AE61 /* State.hpp */,
+				98367EA22414547B00D8AE61 /* Solver.hpp */,
 			);
 			path = "Assignment-2";
 			sourceTree = "<group>";
@@ -86,6 +90,7 @@
 			children = (
 				98367E9F241445A100D8AE61 /* TestHeuristics.mm */,
 				98367E9D2414410E00D8AE61 /* TestState.mm */,
+				98367EA52414572100D8AE61 /* TestSolver.mm */,
 				98367E9124143EB400D8AE61 /* Info.plist */,
 			);
 			path = Assignment2Tests;
@@ -187,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98367EA0241445A100D8AE61 /* TestHeuristics.mm in Sources */,
+				98367EA62414572100D8AE61 /* TestSolver.mm in Sources */,
 				98367E9E2414410E00D8AE61 /* TestState.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
