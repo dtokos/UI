@@ -10,12 +10,21 @@ using namespace std;
 
 class Heuristics {
 public:
-	virtual int evaluate(State *curentState, State *finalState) = 0;
+	virtual void setFinal(State *finalState) = 0;
+	virtual int evaluate(State *curentState) = 0;
 };
 
-class SpotHeuristics : public Heuristics {
+class BaseHeuristics : public Heuristics {
 public:
-	int evaluate(State *curentState, State *finalState) {
+	void setFinal(State *fS) {finalState = fS;}
+
+protected:
+	State *finalState;
+};
+
+class SpotHeuristics : public BaseHeuristics {
+public:
+	int evaluate(State *curentState) {
 		int numOfDiffTiles = 0;
 		
 		for (int i = 0; i < curentState->tiles.size(); i++)
@@ -26,7 +35,7 @@ public:
 	}
 };
 
-class DistanceHeuristics : public Heuristics {
+class DistanceHeuristics : public BaseHeuristics {
 private:
 	struct Point {
 		int x, y;
@@ -37,7 +46,7 @@ private:
 	};
 	
 public:
-	int evaluate(State *curentState, State *finalState) {
+	int evaluate(State *curentState) {
 		int distance = 0;
 		Point point;
 		map<int, Point> lookup;
@@ -57,25 +66,29 @@ public:
 
 class GroupHeuristics : public Heuristics {
 public:
-	using TransformFnc = function<int(State *, State *, int, Heuristics *)>;
+	using TransformFnc = function<int(int, int)>;
 	GroupHeuristics(vector<Heuristics *> heuristics, TransformFnc transformFnc) : heuristics(heuristics), transformFnc(transformFnc) {}
 	
-	int evaluate(State *curentState, State *finalState) {
-		return accumulate(heuristics.begin(), heuristics.end(), 0, [this, curentState, finalState](int acc, Heuristics *h) {
-			return transformFnc(curentState, finalState, acc, h);
+	void setFinal(State *finalState) {
+		for (auto h : heuristics)
+			h->setFinal(finalState);
+	}
+	
+	int evaluate(State *curentState) {
+		return accumulate(heuristics.begin(), heuristics.end(), 0, [this, curentState](int acc, Heuristics *h) {
+			return transformFnc(acc, h->evaluate(curentState));
 		});
 	}
 	
 private:
 	vector<Heuristics *> heuristics;
 	TransformFnc transformFnc;
-	
 };
 
 class SumHeuristics : public GroupHeuristics {
 public:
 	SumHeuristics(vector<Heuristics *> heuristics) :
-		GroupHeuristics(heuristics, [](State *c, State *f, int acc, Heuristics *h) { return acc + h->evaluate(c, f); }) {}
+		GroupHeuristics(heuristics, [](int acc, int result) { return acc + result; }) {}
 };
 
 
