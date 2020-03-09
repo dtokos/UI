@@ -44,11 +44,6 @@
 	XCTAssertFalse(s1 == s4);
 }
 
--(void)testStateID {
-	State s1{{3, 1}, {1, 2, 3}, {0, 0}};
-	XCTAssertEqual("1,2,3,", s1.getID());
-}
-
 -(void)testStateNeighbourAtEdges {
 	State s1{{2, 2}, {1, 2, 3, 4}, {0, 0}};
 	State s2{{2, 2}, {1, 2, 3, 4}, {1, 1}};
@@ -60,18 +55,6 @@
 	XCTAssertEqual(nullopt, n2);
 	XCTAssertEqual(nullopt, n3);
 	XCTAssertEqual(nullopt, n4);
-}
-
--(void)testStateNeighbours {
-	State s1{{3, 3}, {1, 2, 3, 4, 5, 6, 7, 8, 9}, {1, 1}};
-	optional<State> n1 = s1.getNeighbour(State::Direction::Top);
-	optional<State> n2 = s1.getNeighbour(State::Direction::Left);
-	optional<State> n3 = s1.getNeighbour(State::Direction::Right);
-	optional<State> n4 = s1.getNeighbour(State::Direction::Bottom);
-	XCTAssertEqual("1,5,3,4,2,6,7,8,9,", n1->getID());
-	XCTAssertEqual("1,2,3,5,4,6,7,8,9,", n2->getID());
-	XCTAssertEqual("1,2,3,4,6,5,7,8,9,", n3->getID());
-	XCTAssertEqual("1,2,3,4,8,6,7,5,9,", n4->getID());
 }
 
 @end

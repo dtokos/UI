@@ -49,14 +49,6 @@ public:
 		return size == b.size && emptyPosition == b.emptyPosition && tiles == b.tiles;
 	}
 	
-	string getID() {
-		ostringstream result;
-		for (auto tile : tiles)
-			result << tile << ",";
-		
-		return result.str();
-	}
-	
 	optional<State> getNeighbour(Direction direction) {
 		Position nextPos = neighbourPosition(direction);
 		
