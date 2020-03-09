@@ -20,7 +20,7 @@ public:
 	};
 	
 	struct Position {
-		 int x, y;
+		int x, y;
 		
 		bool operator ==(const Position &b) const {return x == b.x && y == b.y;}
 		bool operator !=(const Position &b) const {return x != b.x || y != b.y;}
@@ -30,13 +30,11 @@ public:
 		}
 	};
 	
-	struct Score {
-		int f, g, h;
-	};
-	
+	struct Score {int f, g, h;};
 	enum Direction {Top, Left, Right, Bottom};
 	
 	State(Size size, vector<int> tiles, Position emptyPos) : size(size), tiles(tiles), emptyPosition(emptyPos) {}
+	State(Size size, vector<int> tiles, Score score, Position emptyPos) : size(size), tiles(tiles), score(score), emptyPosition(emptyPos) {}
 	State(Size size, vector<int> tiles) : size(size), tiles(tiles), emptyPosition(findEmptyCoordinates()) {}
 	State(const State &old) : size(old.size), tiles(old.tiles), score(old.score), emptyPosition(old.emptyPosition) {}
 	
@@ -58,7 +56,7 @@ public:
 		vector<int> nextTiles = tiles;
 		swap(nextTiles[emptyPosition.toIndex(size)], nextTiles[nextPos.toIndex(size)]);
 		
-		return State{size, nextTiles, nextPos};
+		return State{size, nextTiles, {score.f, score.g + 1, score.h}, nextPos};
 	}
 	
 private:

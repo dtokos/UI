@@ -33,7 +33,7 @@ public:
 private:
 	struct HeuristicCompare {
 		bool operator()(const State &lhs, const State &rhs) const {
-			return lhs.score.f < rhs.score.f;
+			return lhs.score.f > rhs.score.f;
 		}
 	};
 	
@@ -95,10 +95,8 @@ private:
 		for (auto direction : allDirections) {
 			optional<State> neighbour = state.getNeighbour(direction);
 			
-			if (neighbour != nullopt && closed.find(*neighbour) == closed.end()) {
-				neighbour->score.g++;
+			if (neighbour != nullopt && closed.find(*neighbour) == closed.end())
 				pushOpen(*neighbour);
-			}
 		}
 	}
 	
