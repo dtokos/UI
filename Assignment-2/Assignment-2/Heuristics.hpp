@@ -36,23 +36,15 @@ public:
 };
 
 class DistanceHeuristics : public BaseHeuristics {
-private:
-	struct Point {
-		int x, y;
-		
-		int distance(Point &b) {
-			return abs(x - b.x) + abs(y - b.y);
-		}
-	};
-	
 public:
+	void setFinal(State *fS) {
+		BaseHeuristics::setFinal(fS);
+		buildLookup();
+	}
+	
 	int evaluate(State *curentState) {
 		int distance = 0;
 		Point point;
-		map<int, Point> lookup;
-		
-		for (int i = 0; i < finalState->tiles.size(); i++)
-			lookup[finalState->tiles[i]] = {i % finalState->size.width, i / finalState->size.width};
 		
 		for (int i = 0; i < curentState->tiles.size(); i++) {
 			point.x = i % curentState->size.width;
@@ -61,6 +53,19 @@ public:
 		}
 		
 		return distance;
+	}
+	
+private:
+	struct Point {
+		int x, y;
+		int distance(Point &b) {return abs(x - b.x) + abs(y - b.y);}
+	};
+	
+	map<int, Point> lookup;
+	
+	void buildLookup() {
+		for (int i = 0; i < finalState->tiles.size(); i++)
+			lookup[finalState->tiles[i]] = {i % finalState->size.width, i / finalState->size.width};
 	}
 };
 
