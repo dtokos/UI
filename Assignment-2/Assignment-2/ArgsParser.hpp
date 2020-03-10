@@ -119,6 +119,9 @@ private:
 			
 			index++;
 		}
+		
+		if (!hasEmpty)
+			throw ParsingException("No empty tile found in: " + stateStr);
 	
 		return {size, tiles, emptyPos};
 	}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		980A433124181E20008F44EE /* TestArgsParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 980A433024181E20008F44EE /* TestArgsParser.mm */; };
 		98367E8324143D9E00D8AE61 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98367E8224143D9E00D8AE61 /* main.cpp */; };
 		98367E9E2414410E00D8AE61 /* TestState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9D2414410E00D8AE61 /* TestState.mm */; };
 		98367EA0241445A100D8AE61 /* TestHeuristics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9F241445A100D8AE61 /* TestHeuristics.mm */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		980A432D2417E30E008F44EE /* ArgsParser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArgsParser.hpp; sourceTree = "<group>"; };
+		980A433024181E20008F44EE /* TestArgsParser.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestArgsParser.mm; sourceTree = "<group>"; };
 		98367E7F24143D9E00D8AE61 /* Assignment-2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment-2"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98367E8224143D9E00D8AE61 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		98367E8D24143EB400D8AE61 /* Assignment2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,7 @@
 		98367E8E24143EB400D8AE61 /* Assignment2Tests */ = {
 			isa = PBXGroup;
 			children = (
+				980A433024181E20008F44EE /* TestArgsParser.mm */,
 				98367E9F241445A100D8AE61 /* TestHeuristics.mm */,
 				98367E9D2414410E00D8AE61 /* TestState.mm */,
 				98367EA52414572100D8AE61 /* TestSolver.mm */,
@@ -194,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98367EA0241445A100D8AE61 /* TestHeuristics.mm in Sources */,
+				980A433124181E20008F44EE /* TestArgsParser.mm in Sources */,
 				98367EA62414572100D8AE61 /* TestSolver.mm in Sources */,
 				98367E9E2414410E00D8AE61 /* TestState.mm in Sources */,
 			);
