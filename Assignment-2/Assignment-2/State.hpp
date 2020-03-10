@@ -25,9 +25,8 @@ public:
 		bool operator ==(const Position &b) const {return x == b.x && y == b.y;}
 		bool operator !=(const Position &b) const {return x != b.x || y != b.y;}
 		
-		int toIndex(Size size) const {
-			return y * size.width + x;
-		}
+		int toIndex(Size size) const {return y * size.width + x;}
+		string toString() const {return "(" + to_string(x) + ", " + to_string(y) + ")";}
 	};
 	
 	struct Score {int f, g, h;};
