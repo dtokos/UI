@@ -22,12 +22,12 @@ public:
 	Solver(Heuristics *h) : heuristics(h) {}
 	
 	// Return type will be different
-	void solve(State &start, State &finish) {
+	vector<State> solve(State &start, State &finish) {
 		if (start.size != finish.size)
 			throw SolvingException("State sizes doesnt match: " + start.size.toString() + " and " + finish.size.toString());
 		
 		clear();
-		findSolution(start, finish);
+		return findSolution(start, finish);
 	}
 	
 private:
@@ -56,18 +56,19 @@ private:
 		closed.clear();
 	}
 	
-	void findSolution(State &start, State &finish) {
+	vector<State> findSolution(State &start, State &finish) {
 		start.score.g = 0;
 		heuristics->setFinal(&finish);
 		pushOpen(start);
 		
 		while (!open.empty()) {
-			State state = popOpen();
+			//State state = popOpen();
+			const State *state = popAndClose();
 			
-			if (state == finish)
-				return; // Found path, traceback
+			if (*state == finish)
+				return traceback(state);
 			
-			closeState(state);
+			//closeState(state);
 			appendNeighbours(state);
 		}
 		
@@ -79,21 +80,26 @@ private:
 		open.push(state);
 	}
 	
+	const State *popAndClose() {
+		return closeState(popOpen());
+	}
+	
 	State popOpen() {
 		State s = open.top();
 		open.pop();
 		return s;
 	}
 	
-	void closeState(State &state) {
-		closed.insert(state);
+	const State *closeState(const State &state) {
+		auto asd = closed.insert(state);
+		return &(*asd.first);
 	}
 	
-	void appendNeighbours(State &state) {
+	void appendNeighbours(const State *state) {
 		constexpr Direction allDirections[] = {Direction::Top, Direction::Left, Direction::Right, Direction::Bottom};
 		
 		for (auto direction : allDirections) {
-			optional<State> neighbour = state.getNeighbour(direction);
+			optional<State> neighbour = state->getNeighbour(direction);
 			
 			if (neighbour != nullopt && closed.find(*neighbour) == closed.end())
 				pushOpen(*neighbour);
@@ -103,6 +109,14 @@ private:
 	void calculateScore(State &state) {
 		state.score.h = heuristics->evaluate(&state);
 		state.score.f = state.score.g + state.score.h;
+	}
+	
+	vector<State> traceback(const State *state) {
+		vector<State> trace;
+		for (const State *s = state; s != NULL; s = s->parent)
+			trace.emplace_back(*s);
+		
+		return trace;
 	}
 };
 
