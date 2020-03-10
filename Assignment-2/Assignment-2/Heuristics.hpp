@@ -1,7 +1,7 @@
 #ifndef Heuristics_hpp
 #define Heuristics_hpp
 
-#include <map>
+#include <unordered_map>
 #include <numeric>
 #include <functional>
 #include "./State.hpp"
@@ -61,7 +61,7 @@ private:
 		int distance(Point &b) {return abs(x - b.x) + abs(y - b.y);}
 	};
 	
-	map<int, Point> lookup;
+	unordered_map<int, Point> lookup;
 	
 	void buildLookup() {
 		for (int i = 0; i < finalState->tiles.size(); i++)
