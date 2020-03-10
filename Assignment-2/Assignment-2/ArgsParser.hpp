@@ -13,12 +13,19 @@ public:
 		Heuristics *heuristics;
 	};
 	
+	struct Config {
+		string tileDelimiter;
+		string emptyTile;
+		int emptyTileValue;
+	};
+	
 	struct ParsingException : public exception {
 		string message;
 		ParsingException(string message) : message(message) {};
 		const char* what() const throw() { return message.c_str(); }
 	};
 	
+	ArgsParser(Config c) : config(c) {}
 	
 	Args parse(vector<string> args) {
 		checkNumOfArgs(args);
@@ -32,6 +39,8 @@ public:
 	}
 	
 private:
+	Config config;
+	
 	void checkNumOfArgs(const vector<string> &args) {
 		if (args.size() < 5)
 			throw ParsingException("Too few arguments passed: " + to_string(args.size()) + " minimum: 5");
@@ -88,21 +97,21 @@ private:
 	}
 	
 	State tryParsingState(const string &stateStr, const State::Size size) {
-		vector<string> parts = split(stateStr, ",");
+		vector<string> parts = split(stateStr, config.tileDelimiter);
 		vector<int> tiles;
 		State::Position emptyPos;
 		
 		bool hasEmpty = false;
 		int index = 0;
 		for (auto &part : parts) {
-			if (part == "_") {
+			if (part == config.emptyTile) {
 				emptyPos.x = index % size.width;
 				emptyPos.y = index / size.height;
 				
 				if (hasEmpty)
 					throw ParsingException("Duplicate empty tile at: " + emptyPos.toString());
 				else {
-					tiles.push_back(-1);
+					tiles.push_back(config.emptyTileValue);
 					hasEmpty = true;
 				}
 			} else

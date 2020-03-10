@@ -32,12 +32,6 @@ public:
 	struct Score {int f, g, h;};
 	enum Direction {Top, Left, Right, Bottom};
 	
-	State(Size size, vector<int> tiles, Position emptyPos) :
-		size(size),
-		tiles(tiles),
-		emptyPosition(emptyPos),
-		parent(NULL),
-		parentDirection(Top) {}
 	State(Size size, vector<int> tiles, Score score, Position emptyPos, const State *parent, Direction parentDirection) :
 		size(size),
 		tiles(tiles),
@@ -45,12 +39,9 @@ public:
 		emptyPosition(emptyPos),
 		parent(parent),
 		parentDirection(parentDirection) {}
-	State(Size size, vector<int> tiles) :
-		size(size),
-		tiles(tiles),
-		emptyPosition(findEmptyCoordinates()),
-		parent(NULL),
-		parentDirection(Top) {}
+	
+	State(Size size, vector<int> tiles, Position emptyPos) :
+		State(size, tiles, {0, 0, 0}, emptyPos, NULL, Top) {};
 	
 	Size size;
 	vector<int> tiles;
@@ -77,14 +68,6 @@ public:
 	}
 	
 private:
-	Position findEmptyCoordinates() {
-		for (int i = 0; i < tiles.size(); i++)
-			if (tiles[i] == -1)
-				return {i % size.width, i / size.height};
-		
-		throw "Empty coordinates could not be found";
-	}
-		
 	Position neighbourPosition(Direction direction) const {
 		switch (direction) {
 			case Top: return {emptyPosition.x, emptyPosition.y - 1};

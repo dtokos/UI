@@ -21,7 +21,6 @@ public:
 	
 	Solver(Heuristics *h) : heuristics(h) {}
 	
-	// Return type will be different
 	vector<State> solve(State &start, State &finish) {
 		if (start.size != finish.size)
 			throw SolvingException("State sizes doesnt match: " + start.size.toString() + " and " + finish.size.toString());
@@ -62,13 +61,11 @@ private:
 		pushOpen(start);
 		
 		while (!open.empty()) {
-			//State state = popOpen();
 			const State *state = popAndClose();
 			
 			if (*state == finish)
 				return traceback(state);
 			
-			//closeState(state);
 			appendNeighbours(state);
 		}
 		

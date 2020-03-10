@@ -10,11 +10,13 @@ void printResult(const vector<State> result);
 void printDirection(const State &state);
 void printState(const State &state);
 
+const ArgsParser::Config config = {",", "_", -1};
+
 int main(int argc, const char *argv[]) {
 	vector<string> args = toArgs(argc, argv);
 	
 	try {
-		ArgsParser parser;
+		ArgsParser parser{config};
 		ArgsParser::Args parsedArgs = parser.parse(args);
 		Solver solver(parsedArgs.heuristics);
 		printResult(solver.solve(parsedArgs.start, parsedArgs.finish));
@@ -41,7 +43,7 @@ void printUsage(const string &programName) {
 	cout << "Usage: " << programName << " heuristics dimension start finish\n";
 	cout << "\t[heuristics] - Which heuristics to use. Valid options are: 1 - Spot, 2 - Distance, 3 - Sum heuristics\n";
 	cout << "\t[dimension] - Determines sizes of start and finish states. Example: 3x4\n";
-	cout << "\t[start|finish] - Comma separated list of integers including one '_' for empty tile\n";
+	cout << "\t[start|finish] - List of integers separated by '" + config.tileDelimiter + "' including one '" + config.emptyTile + "' for empty tile\n";
 }
 
 void printResult(const vector<State> result) {
@@ -79,8 +81,8 @@ void printDirection(const State &state) {
 void printState(const State &state) {
 	int index = 0;
 	for (auto &tile : state.tiles) {
-		if (tile == -1)
-			cout << '_';
+		if (tile == config.emptyTileValue)
+			cout << config.emptyTile;
 		else
 			cout << tile;
 		
