@@ -50,6 +50,24 @@
 	XCTAssertNoThrow(solver.solve(s1, s2));
 }
 
+-(void)test3x3SolvableExampleWithSpotHeuristicsResult {
+	State s1{{3, 3}, {1, 8, 2, -1, 4, 3, 7, 6, 5}, {0, 1}};
+	State s2{{3, 3}, {1, 2, 3, 4, 5, 6, 7, 8, -1}, {2, 2}};
+	SpotHeuristics h;
+	Solver solver{&h};
+	vector<State> result = solver.solve(s1, s2);
+	XCTAssertEqual(10, result.size());
+	XCTAssertEqual(Direction::Bottom, result[0].parentDirection);
+	XCTAssertEqual(Direction::Right, result[1].parentDirection);
+	XCTAssertEqual(Direction::Top, result[2].parentDirection);
+	XCTAssertEqual(Direction::Left, result[3].parentDirection);
+	XCTAssertEqual(Direction::Bottom, result[4].parentDirection);
+	XCTAssertEqual(Direction::Bottom, result[5].parentDirection);
+	XCTAssertEqual(Direction::Right, result[6].parentDirection);
+	XCTAssertEqual(Direction::Top, result[7].parentDirection);
+	XCTAssertEqual(Direction::Right, result[8].parentDirection);
+}
+
 -(void)test3x3UnsolvableExampleWithSpotHeuristics {
 	State s1{{3, 3}, {8, 1, 2, -1, 4, 3, 7, 6, 5}, {0, 1}};
 	State s2{{3, 3}, {1, 2, 3, 4, 5, 6, 7, 8, -1}, {2, 2}};
