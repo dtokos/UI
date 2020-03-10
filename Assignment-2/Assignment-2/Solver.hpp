@@ -88,8 +88,7 @@ private:
 	}
 	
 	const State *closeState(const State &state) {
-		auto asd = closed.insert(state);
-		return &(*asd.first);
+		return &(*closed.insert(state).first);
 	}
 	
 	void appendNeighbours(const State *state) {
