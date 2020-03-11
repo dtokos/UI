@@ -58,7 +58,7 @@ public:
 	optional<State> getNeighbour(Direction direction) const {
 		Position nextPos = neighbourPosition(direction);
 		
-		if (isNeighbourOutOfBounds(nextPos))
+		if (isOutOfBounds(nextPos))
 			return nullopt;
 		
 		vector<int> nextTiles = tiles;
@@ -77,7 +77,7 @@ private:
 		}
 	}
 	
-	bool isNeighbourOutOfBounds(Position pos) const {
+	bool isOutOfBounds(Position pos) const {
 		return pos.x < 0 || pos.x >= size.width || pos.y < 0 || pos.y >= size.height;
 	}
 };
