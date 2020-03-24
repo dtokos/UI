@@ -7,6 +7,7 @@
 #include <string>
 #include <unordered_set>
 #include "./Heuristics.hpp"
+#include "./MinHeap.hpp"
 
 using namespace std;
 using Direction = State::Direction;
@@ -30,12 +31,6 @@ public:
 	}
 	
 private:
-	struct HeuristicCompare {
-		bool operator()(const State *lhs, const State *rhs) const {
-			return lhs->score.f > rhs->score.f;
-		}
-	};
-	
 	struct StateHasher {
 		size_t operator()(const State &s) const {
 			size_t hash = s.tiles.size();
@@ -48,48 +43,61 @@ private:
 	
 	Heuristics *heuristics;
 	unordered_set<State, StateHasher> states;
-	priority_queue<const State *, vector<const State *>, HeuristicCompare> open;
+	unordered_set<const State *> closed;
+	MinHeap open;
 	
 	void clear() {
-		open = priority_queue<const State *, vector<const State *>, HeuristicCompare>();
+		open.clear();
 		states.clear();
+		closed.clear();
 	}
 	
 	vector<State> findSolution(State &start, State &finish) {
 		start.score.g = 0;
 		heuristics->setFinal(&finish);
-		pushOpenAndCloseDuplicates(start);
+		pushOrUpdateOpenAndCloseDuplicates(start);
 		
-		while (!open.empty()) {
+		while (!open.isEmpty()) {
 			const State *state = popOpen();
 			
+			// Try comparing h score
 			if (*state == finish)
 				return traceback(state);
 			
+			close(state);
 			appendNeighbours(state);
 		}
 		
 		throw SolvingException("Solution doesnt exist");
 	}
 	
-	void pushOpenAndCloseDuplicates(State &state) {
+	void close(const State *s) {
+		closed.insert(s);
+	}
+	
+	void pushOrUpdateOpenAndCloseDuplicates(State &state) {
 		calculateScore(state);
-		open.push(closeDuplicates(state));
+		const auto result = states.insert(state);
+		const State *s = &(*result.first);
+		
+		if (result.second)
+			open.push(s);
+		/*else if (state.score.g < s->score.g && closed.find(s) == closed.end()) {
+			s->score = state.score;
+			s->parent = state.parent;
+			s->parentDirection = state.parentDirection;
+			open.decreaseKey(s);
+		}*/
 	}
 	
 	void calculateScore(State &state) {
 		state.score.h = heuristics->evaluate(&state);
+		//state.score.f = state.score.h;
 		state.score.f = state.score.g + state.score.h;
 	}
 	
-	const State *closeDuplicates(State &state) {
-		return &(*states.insert(state).first);
-	}
-	
 	const State *popOpen() {
-		const State *s = open.top();
-		open.pop();
-		return s;
+		return open.pop();
 	}
 	
 	vector<State> traceback(const State *state) {
@@ -108,8 +116,8 @@ private:
 				continue;
 			
 			optional<State> neighbour = state->getNeighbour(direction);
-			if (neighbour != nullopt && isNotDuplicate(*neighbour))
-				pushOpenAndCloseDuplicates(*neighbour);
+			if (neighbour != nullopt)
+				pushOrUpdateOpenAndCloseDuplicates(*neighbour);
 		}
 	}
 	
@@ -120,10 +128,6 @@ private:
 			(state->parentDirection == Direction::Right && direction == Direction::Left) ||
 			(state->parentDirection == Direction::Bottom && direction == Direction::Top)
 	   );
-	}
-	
-	bool isNotDuplicate(const State &state) {
-		return states.find(state) == states.end();
 	}
 };
 

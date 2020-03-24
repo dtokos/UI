@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		980A433124181E20008F44EE /* TestArgsParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 980A433024181E20008F44EE /* TestArgsParser.mm */; };
+		9825404A24192B09005F5FA7 /* TestSpotSolve.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9825404924192B09005F5FA7 /* TestSpotSolve.mm */; };
 		98367E8324143D9E00D8AE61 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98367E8224143D9E00D8AE61 /* main.cpp */; };
 		98367E9E2414410E00D8AE61 /* TestState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9D2414410E00D8AE61 /* TestState.mm */; };
 		98367EA0241445A100D8AE61 /* TestHeuristics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9F241445A100D8AE61 /* TestHeuristics.mm */; };
 		98367EA62414572100D8AE61 /* TestSolver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367EA52414572100D8AE61 /* TestSolver.mm */; };
+		98E88850241A4D23008E4CCA /* MinHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E8884E241A4D23008E4CCA /* MinHeap.cpp */; };
+		98E88851241A4D23008E4CCA /* MinHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E8884E241A4D23008E4CCA /* MinHeap.cpp */; };
+		98E88852241A7259008E4CCA /* MinHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E8884E241A4D23008E4CCA /* MinHeap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +33,9 @@
 /* Begin PBXFileReference section */
 		980A432D2417E30E008F44EE /* ArgsParser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArgsParser.hpp; sourceTree = "<group>"; };
 		980A433024181E20008F44EE /* TestArgsParser.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestArgsParser.mm; sourceTree = "<group>"; };
+		9825404124192ADA005F5FA7 /* PerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9825404524192ADA005F5FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9825404924192B09005F5FA7 /* TestSpotSolve.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestSpotSolve.mm; sourceTree = "<group>"; };
 		98367E7F24143D9E00D8AE61 /* Assignment-2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment-2"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98367E8224143D9E00D8AE61 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		98367E8D24143EB400D8AE61 /* Assignment2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,9 +46,18 @@
 		98367E9F241445A100D8AE61 /* TestHeuristics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestHeuristics.mm; sourceTree = "<group>"; };
 		98367EA22414547B00D8AE61 /* Solver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Solver.hpp; sourceTree = "<group>"; };
 		98367EA52414572100D8AE61 /* TestSolver.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestSolver.mm; sourceTree = "<group>"; };
+		98E8884E241A4D23008E4CCA /* MinHeap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MinHeap.cpp; sourceTree = "<group>"; };
+		98E8884F241A4D23008E4CCA /* MinHeap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MinHeap.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9825403E24192ADA005F5FA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		98367E7C24143D9E00D8AE61 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,11 +75,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9825404224192ADA005F5FA7 /* PerformanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				9825404924192B09005F5FA7 /* TestSpotSolve.mm */,
+				9825404524192ADA005F5FA7 /* Info.plist */,
+			);
+			path = PerformanceTests;
+			sourceTree = "<group>";
+		};
 		98367E7624143D9E00D8AE61 = {
 			isa = PBXGroup;
 			children = (
 				98367E8124143D9E00D8AE61 /* Assignment-2 */,
 				98367E8E24143EB400D8AE61 /* Assignment2Tests */,
+				9825404224192ADA005F5FA7 /* PerformanceTests */,
 				98367E8024143D9E00D8AE61 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +99,7 @@
 			children = (
 				98367E7F24143D9E00D8AE61 /* Assignment-2 */,
 				98367E8D24143EB400D8AE61 /* Assignment2Tests.xctest */,
+				9825404124192ADA005F5FA7 /* PerformanceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +112,8 @@
 				98367E9624143EE800D8AE61 /* Heuristics.hpp */,
 				98367E9A24143F3500D8AE61 /* State.hpp */,
 				98367EA22414547B00D8AE61 /* Solver.hpp */,
+				98E8884F241A4D23008E4CCA /* MinHeap.hpp */,
+				98E8884E241A4D23008E4CCA /* MinHeap.cpp */,
 			);
 			path = "Assignment-2";
 			sourceTree = "<group>";
@@ -104,6 +133,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9825404024192ADA005F5FA7 /* PerformanceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9825404824192ADA005F5FA7 /* Build configuration list for PBXNativeTarget "PerformanceTests" */;
+			buildPhases = (
+				9825403D24192ADA005F5FA7 /* Sources */,
+				9825403E24192ADA005F5FA7 /* Frameworks */,
+				9825403F24192ADA005F5FA7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PerformanceTests;
+			productName = PerformanceTests;
+			productReference = 9825404124192ADA005F5FA7 /* PerformanceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		98367E7E24143D9E00D8AE61 /* Assignment-2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 98367E8624143D9E00D8AE61 /* Build configuration list for PBXNativeTarget "Assignment-2" */;
@@ -147,6 +193,9 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = dtokos;
 				TargetAttributes = {
+					9825404024192ADA005F5FA7 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					98367E7E24143D9E00D8AE61 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
@@ -169,11 +218,19 @@
 			targets = (
 				98367E7E24143D9E00D8AE61 /* Assignment-2 */,
 				98367E8C24143EB400D8AE61 /* Assignment2Tests */,
+				9825404024192ADA005F5FA7 /* PerformanceTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9825403F24192ADA005F5FA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		98367E8B24143EB400D8AE61 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,10 +241,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9825403D24192ADA005F5FA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98E88852241A7259008E4CCA /* MinHeap.cpp in Sources */,
+				9825404A24192B09005F5FA7 /* TestSpotSolve.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		98367E7B24143D9E00D8AE61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98E88850241A4D23008E4CCA /* MinHeap.cpp in Sources */,
 				98367E8324143D9E00D8AE61 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +265,7 @@
 			files = (
 				98367EA0241445A100D8AE61 /* TestHeuristics.mm in Sources */,
 				980A433124181E20008F44EE /* TestArgsParser.mm in Sources */,
+				98E88851241A4D23008E4CCA /* MinHeap.cpp in Sources */,
 				98367EA62414572100D8AE61 /* TestSolver.mm in Sources */,
 				98367E9E2414410E00D8AE61 /* TestState.mm in Sources */,
 			);
@@ -206,6 +274,42 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		9825404624192ADA005F5FA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PerformanceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = dtokos.PerformanceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9825404724192ADA005F5FA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PerformanceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = dtokos.PerformanceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		98367E8424143D9E00D8AE61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -322,6 +426,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -372,6 +477,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9825404824192ADA005F5FA7 /* Build configuration list for PBXNativeTarget "PerformanceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9825404624192ADA005F5FA7 /* Debug */,
+				9825404724192ADA005F5FA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		98367E7A24143D9E00D8AE61 /* Build configuration list for PBXProject "Assignment-2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

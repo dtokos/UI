@@ -45,11 +45,11 @@ public:
 	
 	Size size;
 	vector<int> tiles;
-	Score score;
+	mutable Score score;
 	Position emptyPosition;
 	
-	const State *parent;
-	Direction parentDirection;
+	mutable const State *parent;
+	mutable Direction parentDirection;
 	
 	bool operator ==(const State &b) const {
 		return size == b.size && emptyPosition == b.emptyPosition && tiles == b.tiles;
