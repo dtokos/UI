@@ -56,14 +56,14 @@ private:
 		set_intersection(ss.begin(), ss.end(), sf.begin(), sf.end(), back_inserter(intersection));
 		
 		if (intersection.size() != start.tiles.size() || intersection.size() != finish.tiles.size())
-			throw ParsingException("States contain different tiles");
+			throw ParsingException("States cannot contain different or duplicate tiles");
 	}
 	
 	State::Size parseSize(const string &sizeStr) {
 		try {
 			State::Size size = tryParsingSize(sizeStr);
 			if (size.width < 1 || size.height < 1)
-				throw ParsingException("Invalid state size: " + size.toString() + " minimum: (1, 1)");
+				throw ParsingException("Invalid state size: " + size.toString() + " minimum: <1, 1>");
 			
 			return size;
 		} catch (const invalid_argument &e) {

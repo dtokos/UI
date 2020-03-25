@@ -25,7 +25,6 @@ int main(int argc, const char *argv[]) {
 		printUsage(args[0]);
 	} catch (const Solver::SolvingException &e) {
 		cerr << e.what() << '\n';
-		printUsage(args[0]);
 	}
 	
 	return 0;
