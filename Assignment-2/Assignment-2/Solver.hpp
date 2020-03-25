@@ -82,12 +82,12 @@ private:
 		
 		if (result.second)
 			open.push(s);
-		/*else if (state.score.g < s->score.g && closed.find(s) == closed.end()) {
+		else if (state.score.g < s->score.g && closed.find(s) == closed.end()) {
 			s->score = state.score;
 			s->parent = state.parent;
 			s->parentDirection = state.parentDirection;
 			open.decreaseKey(s);
-		}*/
+		}
 	}
 	
 	void calculateScore(State &state) {

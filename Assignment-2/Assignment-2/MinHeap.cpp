@@ -25,9 +25,10 @@ constexpr size_t MinHeap::parentIndex(const size_t index) {
 
 const State *MinHeap::pop() {
 	const State *ret = states.front();
-	lookup.erase(ret);
 	states[0] = states.back();
+	lookup[states[0]] = 0;
 	states.pop_back();
+	lookup.erase(ret);
 	heapifyDown();
 	
 	return ret;
@@ -36,9 +37,10 @@ const State *MinHeap::pop() {
 void MinHeap::heapifyDown() {
 	size_t index = 0;
 	size_t lCIndex = leftChildIndex(index);
+	size_t rCIndex = lCIndex + 1;
 	
 	while (lCIndex < states.size()) {
-		const size_t smallerChildIndex = (states[lCIndex + 1]->score.f < states[lCIndex]->score.f) ? lCIndex + 1 : lCIndex;
+		const size_t smallerChildIndex = (rCIndex < states.size() && states[rCIndex]->score.f < states[lCIndex]->score.f) ? rCIndex : lCIndex;
 		
 		if (states[index]->score.f < states[smallerChildIndex]->score.f)
 			return;
@@ -48,6 +50,7 @@ void MinHeap::heapifyDown() {
 		lookup[states[smallerChildIndex]] = smallerChildIndex;
 		index = smallerChildIndex;
 		lCIndex = leftChildIndex(index);
+		rCIndex = lCIndex + 1;
 	}
 }
 
