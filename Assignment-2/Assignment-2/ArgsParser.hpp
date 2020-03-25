@@ -1,7 +1,7 @@
 #ifndef ArgsParser_hpp
 #define ArgsParser_hpp
 
-#include "./Heuristics.hpp"
+#include "./ScoreCalculator.hpp"
 
 using namespace std;
 
@@ -10,7 +10,7 @@ public:
 	struct Args {
 		State start;
 		State finish;
-		Heuristics *heuristics;
+		ScoreCalculator *scoreCalculator;
 	};
 	
 	struct Config {
@@ -29,12 +29,12 @@ public:
 	
 	Args parse(vector<string> args) {
 		checkNumOfArgs(args);
-		State::Size size = parseSize(args[2]);
+		State::Size size = parseSize(args[3]);
 		
 		return {
-			parseState(args[3], size),
 			parseState(args[4], size),
-			parseHeuristics(args[1])
+			parseState(args[5], size),
+			parseScoreCalculator(args[2], parseHeuristics(args[1])),
 		};
 	}
 	
@@ -42,8 +42,8 @@ private:
 	Config config;
 	
 	void checkNumOfArgs(const vector<string> &args) {
-		if (args.size() < 5)
-			throw ParsingException("Too few arguments passed: " + to_string(args.size()) + " minimum: 5");
+		if (args.size() < 6)
+			throw ParsingException("Too few arguments passed: " + to_string(args.size()) + " minimum: 6");
 	}
 	
 	State::Size parseSize(const string &sizeStr) {
@@ -124,6 +124,15 @@ private:
 			throw ParsingException("No empty tile found in: " + stateStr);
 	
 		return {size, tiles, emptyPos};
+	}
+	
+	ScoreCalculator *parseScoreCalculator(const string &cStr, Heuristics *h) {
+		if (cStr == "gh")
+			return new GHCalculator(h);
+		else if (cStr == "h")
+			return new HCalculator(h);
+		
+		throw ParsingException("Invalid calculator: " + cStr + " valid options are: gh,h");
 	}
 	
 	Heuristics *parseHeuristics(const string &hStr) {

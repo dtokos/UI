@@ -7,6 +7,7 @@
 #include <string>
 #include <unordered_set>
 #include "./Heuristics.hpp"
+#include "./ScoreCalculator.hpp"
 #include "./MinHeap.hpp"
 
 using namespace std;
@@ -20,7 +21,7 @@ public:
 		const char* what() const throw() { return message.c_str(); }
 	};
 	
-	Solver(Heuristics *h) : heuristics(h) {}
+	Solver(ScoreCalculator *c) : scoreCalculator(c) {}
 	
 	vector<State> solve(State &start, State &finish) {
 		if (start.size != finish.size)
@@ -41,7 +42,7 @@ private:
 		}
 	};
 	
-	Heuristics *heuristics;
+	ScoreCalculator *scoreCalculator;
 	unordered_set<State, StateHasher> states;
 	unordered_set<const State *> closed;
 	MinHeap open;
@@ -54,13 +55,12 @@ private:
 	
 	vector<State> findSolution(State &start, State &finish) {
 		start.score.g = 0;
-		heuristics->setFinal(&finish);
+		scoreCalculator->setFinal(&finish);
 		pushOrUpdateOpenAndCloseDuplicates(start);
 		
 		while (!open.isEmpty()) {
 			const State *state = popOpen();
 			
-			// Try comparing h score
 			if (*state == finish)
 				return traceback(state);
 			
@@ -76,24 +76,18 @@ private:
 	}
 	
 	void pushOrUpdateOpenAndCloseDuplicates(State &state) {
-		calculateScore(state);
+		scoreCalculator->calculate(&state);
 		const auto result = states.insert(state);
 		const State *s = &(*result.first);
 		
 		if (result.second)
 			open.push(s);
-		else if (state.score.g < s->score.g && closed.find(s) == closed.end()) {
+		else if (state.score.f < s->score.f && closed.find(s) == closed.end()) {
 			s->score = state.score;
 			s->parent = state.parent;
 			s->parentDirection = state.parentDirection;
 			open.decreaseKey(s);
 		}
-	}
-	
-	void calculateScore(State &state) {
-		state.score.h = heuristics->evaluate(&state);
-		//state.score.f = state.score.h;
-		state.score.f = state.score.g + state.score.h;
 	}
 	
 	const State *popOpen() {

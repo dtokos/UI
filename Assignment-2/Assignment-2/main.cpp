@@ -18,7 +18,7 @@ int main(int argc, const char *argv[]) {
 	try {
 		ArgsParser parser{config};
 		ArgsParser::Args parsedArgs = parser.parse(args);
-		Solver solver(parsedArgs.heuristics);
+		Solver solver(parsedArgs.scoreCalculator);
 		printResult(solver.solve(parsedArgs.start, parsedArgs.finish));
 	} catch (const ArgsParser::ParsingException &e) {
 		cerr << e.what() << '\n';
@@ -40,8 +40,9 @@ vector<string> toArgs(int argc, const char *argv[]) {
 }
 
 void printUsage(const string &programName) {
-	cout << "Usage: " << programName << " heuristics dimension start finish\n";
+	cout << "Usage: " << programName << " heuristics calculator dimension start finish\n";
 	cout << "\t[heuristics] - Which heuristics to use. Valid options are: 1 - Spot, 2 - Distance, 3 - Sum heuristics\n";
+	cout << "\t[calculator] - Determines how the final score of state is calculated. Valid options are: gh, h\n";
 	cout << "\t[dimension] - Determines sizes of start and finish states. Example: 3x4\n";
 	cout << "\t[start|finish] - List of integers separated by '" + config.tileDelimiter + "' including one '" + config.emptyTile + "' for empty tile\n";
 }
