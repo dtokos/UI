@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		980A433124181E20008F44EE /* TestArgsParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 980A433024181E20008F44EE /* TestArgsParser.mm */; };
-		9825404A24192B09005F5FA7 /* TestSpotSolve.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9825404924192B09005F5FA7 /* TestSpotSolve.mm */; };
 		98367E8324143D9E00D8AE61 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98367E8224143D9E00D8AE61 /* main.cpp */; };
 		98367E9E2414410E00D8AE61 /* TestState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9D2414410E00D8AE61 /* TestState.mm */; };
 		98367EA0241445A100D8AE61 /* TestHeuristics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367E9F241445A100D8AE61 /* TestHeuristics.mm */; };
 		98367EA62414572100D8AE61 /* TestSolver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98367EA52414572100D8AE61 /* TestSolver.mm */; };
 		98DCC4AD242B800100C7910B /* TestScoreCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98DCC4AC242B800100C7910B /* TestScoreCalculator.mm */; };
+		98DCC4AF242BAAC900C7910B /* TestGHSpot.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98DCC4AE242BAAC900C7910B /* TestGHSpot.mm */; };
+		98DCC4B1242BB5CD00C7910B /* TestHSpot.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98DCC4B0242BB5CD00C7910B /* TestHSpot.mm */; };
+		98DCC4B3242BB64800C7910B /* TestGHDistance.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98DCC4B2242BB64800C7910B /* TestGHDistance.mm */; };
+		98DCC4B5242BB7BB00C7910B /* TestHDistance.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98DCC4B4242BB7BB00C7910B /* TestHDistance.mm */; };
+		98DCC4B7242BB8BF00C7910B /* TestGHSum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98DCC4B6242BB8BF00C7910B /* TestGHSum.mm */; };
+		98DCC4B9242BB9A000C7910B /* TestHSum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98DCC4B8242BB9A000C7910B /* TestHSum.mm */; };
 		98E88850241A4D23008E4CCA /* MinHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E8884E241A4D23008E4CCA /* MinHeap.cpp */; };
 		98E88851241A4D23008E4CCA /* MinHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E8884E241A4D23008E4CCA /* MinHeap.cpp */; };
 		98E88852241A7259008E4CCA /* MinHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E8884E241A4D23008E4CCA /* MinHeap.cpp */; };
@@ -36,7 +41,6 @@
 		980A433024181E20008F44EE /* TestArgsParser.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestArgsParser.mm; sourceTree = "<group>"; };
 		9825404124192ADA005F5FA7 /* PerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9825404524192ADA005F5FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9825404924192B09005F5FA7 /* TestSpotSolve.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestSpotSolve.mm; sourceTree = "<group>"; };
 		98367E7F24143D9E00D8AE61 /* Assignment-2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment-2"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98367E8224143D9E00D8AE61 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		98367E8D24143EB400D8AE61 /* Assignment2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +53,12 @@
 		98367EA52414572100D8AE61 /* TestSolver.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestSolver.mm; sourceTree = "<group>"; };
 		98DCC4AB242B7E8B00C7910B /* ScoreCalculator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ScoreCalculator.hpp; sourceTree = "<group>"; };
 		98DCC4AC242B800100C7910B /* TestScoreCalculator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TestScoreCalculator.mm; path = Assignment2Tests/TestScoreCalculator.mm; sourceTree = SOURCE_ROOT; };
+		98DCC4AE242BAAC900C7910B /* TestGHSpot.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TestGHSpot.mm; path = PerformanceTests/TestGHSpot.mm; sourceTree = SOURCE_ROOT; };
+		98DCC4B0242BB5CD00C7910B /* TestHSpot.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TestHSpot.mm; path = PerformanceTests/TestHSpot.mm; sourceTree = SOURCE_ROOT; };
+		98DCC4B2242BB64800C7910B /* TestGHDistance.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TestGHDistance.mm; path = PerformanceTests/TestGHDistance.mm; sourceTree = SOURCE_ROOT; };
+		98DCC4B4242BB7BB00C7910B /* TestHDistance.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TestHDistance.mm; path = PerformanceTests/TestHDistance.mm; sourceTree = SOURCE_ROOT; };
+		98DCC4B6242BB8BF00C7910B /* TestGHSum.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestGHSum.mm; sourceTree = "<group>"; };
+		98DCC4B8242BB9A000C7910B /* TestHSum.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestHSum.mm; sourceTree = "<group>"; };
 		98E8884E241A4D23008E4CCA /* MinHeap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MinHeap.cpp; sourceTree = "<group>"; };
 		98E8884F241A4D23008E4CCA /* MinHeap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MinHeap.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,7 +91,12 @@
 		9825404224192ADA005F5FA7 /* PerformanceTests */ = {
 			isa = PBXGroup;
 			children = (
-				9825404924192B09005F5FA7 /* TestSpotSolve.mm */,
+				98DCC4AE242BAAC900C7910B /* TestGHSpot.mm */,
+				98DCC4B0242BB5CD00C7910B /* TestHSpot.mm */,
+				98DCC4B2242BB64800C7910B /* TestGHDistance.mm */,
+				98DCC4B4242BB7BB00C7910B /* TestHDistance.mm */,
+				98DCC4B6242BB8BF00C7910B /* TestGHSum.mm */,
+				98DCC4B8242BB9A000C7910B /* TestHSum.mm */,
 				9825404524192ADA005F5FA7 /* Info.plist */,
 			);
 			path = PerformanceTests;
@@ -250,8 +265,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98DCC4B7242BB8BF00C7910B /* TestGHSum.mm in Sources */,
+				98DCC4B9242BB9A000C7910B /* TestHSum.mm in Sources */,
+				98DCC4B1242BB5CD00C7910B /* TestHSpot.mm in Sources */,
+				98DCC4B3242BB64800C7910B /* TestGHDistance.mm in Sources */,
+				98DCC4AF242BAAC900C7910B /* TestGHSpot.mm in Sources */,
 				98E88852241A7259008E4CCA /* MinHeap.cpp in Sources */,
-				9825404A24192B09005F5FA7 /* TestSpotSolve.mm in Sources */,
+				98DCC4B5242BB7BB00C7910B /* TestHDistance.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
