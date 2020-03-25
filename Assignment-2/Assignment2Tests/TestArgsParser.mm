@@ -1,7 +1,7 @@
 #import <XCTest/XCTest.h>
 #import "ArgsParser.hpp"
 
-const ArgsParser::Config config = {",", "_", -1};
+const ArgsParser::Config config = {",", "_"};
 
 @interface TestArgsParser : XCTestCase
 
@@ -43,32 +43,38 @@ const ArgsParser::Config config = {",", "_", -1};
 	XCTAssertThrows(parser.parse({"program", "1", "qw", "2x2", "1,2,3_", "1,2,3,_"}));
 }
 
+-(void)testDifferentTilesShouldThrow {
+	ArgsParser parser{config};
+	XCTAssertThrows(parser.parse({"program", "1", "gh", "2x2", "1,2,3,_", "5,6,7,_"}));
+	XCTAssertThrows(parser.parse({"program", "1", "gh", "2x2", "1,2,3,_", "1,2,4,_"}));
+}
+
 -(void)testShouldParseValidArguments {
 	ArgsParser parser{config};
 	ArgsParser::Args args = parser.parse({"program", "1", "gh", "2x2", "1,2,3,_", "1,_,3,2"});
 	XCTAssertEqual(2, args.start.size.width);
 	XCTAssertEqual(2, args.start.size.height);
 	XCTAssertEqual(4, args.start.tiles.size());
-	XCTAssertEqual(config.emptyTileValue, args.start.tiles[3]);
+	XCTAssertEqual(0, args.start.tiles[3]);
 	XCTAssertEqual(2, args.finish.size.width);
 	XCTAssertEqual(2, args.finish.size.height);
 	XCTAssertEqual(4, args.finish.tiles.size());
-	XCTAssertEqual(config.emptyTileValue, args.finish.tiles[1]);
+	XCTAssertEqual(0, args.finish.tiles[1]);
 	XCTAssertTrue(args.scoreCalculator != NULL);
 }
 
 -(void)testShouldParseValidArgumentsWithConfig {
-	const ArgsParser::Config c = {"|", " ", -5};
+	const ArgsParser::Config c = {"|", " "};
 	ArgsParser parser{c};
 	ArgsParser::Args args = parser.parse({"program", "1", "gh", "2x2", "1|2|3| ", "1| |3|2"});
 	XCTAssertEqual(2, args.start.size.width);
 	XCTAssertEqual(2, args.start.size.height);
 	XCTAssertEqual(4, args.start.tiles.size());
-	XCTAssertEqual(c.emptyTileValue, args.start.tiles[3]);
+	XCTAssertEqual(0, args.start.tiles[3]);
 	XCTAssertEqual(2, args.finish.size.width);
 	XCTAssertEqual(2, args.finish.size.height);
 	XCTAssertEqual(4, args.finish.tiles.size());
-	XCTAssertEqual(c.emptyTileValue, args.finish.tiles[1]);
+	XCTAssertEqual(0, args.finish.tiles[1]);
 	XCTAssertTrue(args.scoreCalculator != NULL);
 }
 

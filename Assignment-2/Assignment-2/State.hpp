@@ -32,7 +32,7 @@ public:
 	struct Score {int f, g, h;};
 	enum Direction {Top, Left, Right, Bottom};
 	
-	State(Size size, vector<int> tiles, Score score, Position emptyPos, const State *parent, Direction parentDirection) :
+	State(Size size, vector<uint8_t> tiles, Score score, Position emptyPos, const State *parent, Direction parentDirection) :
 		size(size),
 		tiles(tiles),
 		score(score),
@@ -40,11 +40,11 @@ public:
 		parent(parent),
 		parentDirection(parentDirection) {}
 	
-	State(Size size, vector<int> tiles, Position emptyPos) :
+	State(Size size, vector<uint8_t> tiles, Position emptyPos) :
 		State(size, tiles, {0, 0, 0}, emptyPos, NULL, Top) {};
 	
 	Size size;
-	vector<int> tiles;
+	vector<uint8_t> tiles;
 	mutable Score score;
 	Position emptyPosition;
 	
@@ -61,7 +61,7 @@ public:
 		if (isOutOfBounds(nextPos))
 			return nullopt;
 		
-		vector<int> nextTiles = tiles;
+		vector<uint8_t> nextTiles = tiles;
 		swap(nextTiles[emptyPosition.toIndex(size)], nextTiles[nextPos.toIndex(size)]);
 		
 		return State{size, nextTiles, {score.f, score.g + 1, score.h}, nextPos, this, direction};

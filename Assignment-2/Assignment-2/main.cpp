@@ -10,7 +10,7 @@ void printResult(const vector<State> result);
 void printDirection(const State &state);
 void printState(const State &state);
 
-const ArgsParser::Config config = {",", "_", -1};
+const ArgsParser::Config config = {",", "_"};
 
 int main(int argc, const char *argv[]) {
 	vector<string> args = toArgs(argc, argv);
@@ -82,10 +82,10 @@ void printDirection(const State &state) {
 void printState(const State &state) {
 	int index = 0;
 	for (auto &tile : state.tiles) {
-		if (tile == config.emptyTileValue)
+		if (tile == 0)
 			cout << config.emptyTile;
 		else
-			cout << tile;
+			cout << static_cast<int>(tile);
 		
 		cout << '\t';
 		

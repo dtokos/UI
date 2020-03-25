@@ -1,6 +1,7 @@
 #ifndef ArgsParser_hpp
 #define ArgsParser_hpp
 
+#include <set>
 #include "./ScoreCalculator.hpp"
 
 using namespace std;
@@ -16,7 +17,6 @@ public:
 	struct Config {
 		string tileDelimiter;
 		string emptyTile;
-		int emptyTileValue;
 	};
 	
 	struct ParsingException : public exception {
@@ -30,10 +30,13 @@ public:
 	Args parse(vector<string> args) {
 		checkNumOfArgs(args);
 		State::Size size = parseSize(args[3]);
+		State start = parseState(args[4], size);
+		State finish = parseState(args[5], size);
+		checkSameStateElements(start, finish);
 		
 		return {
-			parseState(args[4], size),
-			parseState(args[5], size),
+			start,
+			finish,
 			parseScoreCalculator(args[2], parseHeuristics(args[1])),
 		};
 	}
@@ -44,6 +47,16 @@ private:
 	void checkNumOfArgs(const vector<string> &args) {
 		if (args.size() < 6)
 			throw ParsingException("Too few arguments passed: " + to_string(args.size()) + " minimum: 6");
+	}
+	
+	void checkSameStateElements(const State &start, const State &finish) {
+		vector<uint8_t> intersection;
+		set<uint8_t> ss{start.tiles.begin(), start.tiles.end()};
+		set<uint8_t> sf{finish.tiles.begin(), finish.tiles.end()};
+		set_intersection(ss.begin(), ss.end(), sf.begin(), sf.end(), back_inserter(intersection));
+		
+		if (intersection.size() != start.tiles.size() || intersection.size() != finish.tiles.size())
+			throw ParsingException("States contain different tiles");
 	}
 	
 	State::Size parseSize(const string &sizeStr) {
@@ -98,11 +111,11 @@ private:
 	
 	State tryParsingState(const string &stateStr, const State::Size size) {
 		vector<string> parts = split(stateStr, config.tileDelimiter);
-		vector<int> tiles;
+		vector<uint8_t> tiles;
 		State::Position emptyPos;
 		
 		bool hasEmpty = false;
-		int index = 0;
+		int index = 0, tile;
 		for (auto &part : parts) {
 			if (part == config.emptyTile) {
 				emptyPos.x = index % size.width;
@@ -111,11 +124,16 @@ private:
 				if (hasEmpty)
 					throw ParsingException("Duplicate empty tile at: " + emptyPos.toString());
 				else {
-					tiles.push_back(config.emptyTileValue);
+					tiles.push_back(0);
 					hasEmpty = true;
 				}
-			} else
-				tiles.push_back(stoi(part));
+			} else {
+				tile = stoi(part);
+				if (0 < tile && tile < 256)
+					tiles.push_back(tile);
+				else
+					throw ParsingException("Invalid tile value: " + to_string(tile) + " valid values are <1,255>");
+			}
 			
 			index++;
 		}
