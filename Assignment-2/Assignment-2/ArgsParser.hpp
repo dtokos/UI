@@ -62,7 +62,7 @@ private:
 	State::Size parseSize(const string &sizeStr) {
 		try {
 			State::Size size = tryParsingSize(sizeStr);
-			if (size.width <= 1 || size.height <= 1)
+			if (size.width < 1 || size.height < 1)
 				throw ParsingException("Invalid state size: " + size.toString() + " minimum: (1, 1)");
 			
 			return size;
