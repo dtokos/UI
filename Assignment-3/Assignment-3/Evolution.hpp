@@ -30,7 +30,7 @@ private:
 	int populationCount, populationLimit;
 	
 	void createRandomPopulation(int populationSize);
-	optional<Agent> executeAndCalculateFitnesses();
+	optional<Agent> executeAndCalculateFitnesses(const Map &map);
 	void pickParentsAndCreateChildren();
 	void mutateChildren();
 	void swapPopulation();

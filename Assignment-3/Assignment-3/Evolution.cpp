@@ -1,13 +1,13 @@
 #include "Evolution.hpp"
 
-void Evolution::start(const Map &map, int ps, int pl) {
+void Evolution::start(const Map &m, int ps, int pl) {
 	// Create random population (min 20)
 	createRandomPopulation(ps);
 	
 	// Loop
 	for (int populationCount = 0; populationCount < pl; populationCount++) {
 		// Calculate fitness for every agent
-		auto result = executeAndCalculateFitnesses();
+		auto result = executeAndCalculateFitnesses(m);
 		// If agent collected all treasures then return
 		if (result != nullopt)
 			return; // TODO: Change return type
@@ -29,9 +29,9 @@ void Evolution::createRandomPopulation(int ps) {
 		population.emplace_back(Agent{Program::random(), -1.0f});
 }
 
-optional<Agent> Evolution::executeAndCalculateFitnesses() {
+optional<Agent> Evolution::executeAndCalculateFitnesses(const Map &m) {
 	for (auto &agent : population) {
-		VirtualMachine::Result r = vm.execute(agent.program);
+		VirtualMachine::Result r = vm.execute(agent.program, m);
 		
 		if (r.termination == VirtualMachine::Termination::Success)
 			return agent;

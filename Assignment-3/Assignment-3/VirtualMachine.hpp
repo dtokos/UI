@@ -23,11 +23,10 @@ public:
 		Program program;
 	};
 	
-	VirtualMachine(const Map &m, bool stae, int il);
-	Result execute(const Program &program);
+	VirtualMachine(bool stae, int il);
+	Result execute(const Program &program, const Map &map);
 	
 private:
-	const Map &map;
 	bool shouldTerminateAtEnd;
 	int instructionLimit;
 	
@@ -35,8 +34,9 @@ private:
 	int instructionsExecuted, instructionIndex;
 	set<Map::Vector> collectedTreasures;
 	Program program;
+	const Map *map;
 	
-	void prepare(const Program &program);
+	void prepare(const Program &program, const Map &map);
 	void executeInstruction();
 	Instruction &currentInstruction();
 	

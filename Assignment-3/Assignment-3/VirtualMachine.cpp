@@ -1,12 +1,11 @@
 #include "VirtualMachine.hpp"
 
-VirtualMachine::VirtualMachine(const Map &m, bool stae, int il) :
-	map(m),
+VirtualMachine::VirtualMachine(bool stae, int il) :
 	shouldTerminateAtEnd(stae),
 	instructionLimit(il) {}
 
-VirtualMachine::Result VirtualMachine::execute(const Program &p) {
-	prepare(p);
+VirtualMachine::Result VirtualMachine::execute(const Program &p, const Map &m) {
+	prepare(p, m);
 	
 	for (instructionIndex = 0; instructionsExecuted < instructionLimit;) {
 		executeInstruction();
@@ -33,11 +32,12 @@ VirtualMachine::Result VirtualMachine::execute(const Program &p) {
 	return Result{instructionsExecuted, static_cast<int>(collectedTreasures.size()), InstructionLimit, program};
 }
 
-void VirtualMachine::prepare(const Program &p) {
+void VirtualMachine::prepare(const Program &p, const Map &m) {
 	program = p;
+	map = &m;
 	instructionsExecuted = 0;
 	collectedTreasures.clear();
-	playerPosition = map.start;
+	playerPosition = m.start;
 }
 
 void VirtualMachine::executeInstruction() {
@@ -102,13 +102,13 @@ bool VirtualMachine::isOutOfBounds() {
 	return (
 		playerPosition.x < 0 ||
 		playerPosition.y < 0 ||
-		playerPosition.x >= map.size.x ||
-		playerPosition.y >= map.size.y
+		playerPosition.x >= map->size.x ||
+		playerPosition.y >= map->size.y
 	);
 }
 
 bool VirtualMachine::isOnTreasure() const {
-	return map.isOnTreasure(playerPosition);
+	return map->isOnTreasure(playerPosition);
 }
 
 bool VirtualMachine::treasureWasNotCollected() {
@@ -120,7 +120,7 @@ void VirtualMachine::collect() {
 }
 
 bool VirtualMachine::didCollectAllTreasures() {
-	return map.treasureCount() == collectedTreasures.size();
+	return map->treasureCount() == collectedTreasures.size();
 }
 
 bool VirtualMachine::didExecuteAllInstructions() {
