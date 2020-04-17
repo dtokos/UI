@@ -27,7 +27,7 @@ public:
 	Result execute(const Program &program);
 	
 private:
-	Map map;
+	const Map &map;
 	bool shouldTerminateAtEnd;
 	int instructionLimit;
 	
@@ -46,7 +46,7 @@ private:
 	void print(uint8_t address);
 	
 	bool isOutOfBounds();
-	bool isOnTreasure();
+	bool isOnTreasure() const;
 	bool treasureWasNotCollected();
 	void collect();
 	bool didCollectAllTreasures();

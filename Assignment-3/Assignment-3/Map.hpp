@@ -25,11 +25,11 @@ public:
 		start(st),
 		treasures(t.begin(), t.end()) {}
 	
-	bool isOnTreasure(Vector position) {
+	bool isOnTreasure(Vector position) const {
 		return treasures.find(position) != treasures.end();
 	}
 	
-	size_t treasureCount() {
+	size_t treasureCount() const {
 		return treasures.size();
 	}
 	

@@ -14,6 +14,12 @@
 		980DECB92448613600025B9E /* ProgramTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 980DECB82448613600025B9E /* ProgramTests.mm */; };
 		980DECBF2448696200025B9E /* MapTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 980DECBE2448696200025B9E /* MapTests.mm */; };
 		985906242448A8E000397621 /* VirtualMachineTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 985906232448A8E000397621 /* VirtualMachineTests.mm */; };
+		98E7378E244A015A00995CDE /* Evolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E7378C244A015A00995CDE /* Evolution.cpp */; };
+		98E7378F244A015A00995CDE /* Evolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E7378C244A015A00995CDE /* Evolution.cpp */; };
+		98E73795244A085000995CDE /* FitnessTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98E73794244A085000995CDE /* FitnessTests.mm */; };
+		98E7379B244A2E4100995CDE /* CrossingTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98E7379A244A2E4100995CDE /* CrossingTests.mm */; };
+		98E737A5244A33A200995CDE /* SelectionTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98E737A4244A33A200995CDE /* SelectionTests.mm */; };
+		98E737AB244A4AB900995CDE /* MutationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98E737AA244A4AB900995CDE /* MutationTests.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +48,17 @@
 		980DECBB2448660300025B9E /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		980DECBE2448696200025B9E /* MapTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MapTests.mm; sourceTree = "<group>"; };
 		985906232448A8E000397621 /* VirtualMachineTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VirtualMachineTests.mm; sourceTree = "<group>"; };
+		98E7378C244A015A00995CDE /* Evolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Evolution.cpp; sourceTree = "<group>"; };
+		98E7378D244A015A00995CDE /* Evolution.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Evolution.hpp; sourceTree = "<group>"; };
+		98E73791244A06C000995CDE /* Fitness.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fitness.hpp; sourceTree = "<group>"; };
+		98E73794244A085000995CDE /* FitnessTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FitnessTests.mm; sourceTree = "<group>"; };
+		98E73797244A0E9F00995CDE /* Crossing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Crossing.hpp; sourceTree = "<group>"; };
+		98E7379A244A2E4100995CDE /* CrossingTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CrossingTests.mm; sourceTree = "<group>"; };
+		98E7379D244A307A00995CDE /* Selection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Selection.hpp; sourceTree = "<group>"; };
+		98E737A1244A312F00995CDE /* Agent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Agent.hpp; sourceTree = "<group>"; };
+		98E737A4244A33A200995CDE /* SelectionTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectionTests.mm; sourceTree = "<group>"; };
+		98E737A7244A47D000995CDE /* Mutation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mutation.hpp; sourceTree = "<group>"; };
+		98E737AA244A4AB900995CDE /* MutationTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MutationTests.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +106,13 @@
 				980DECB324485EEF00025B9E /* Program.hpp */,
 				980DECAF24485CFC00025B9E /* VirtualMachine.hpp */,
 				980DECAE24485CFC00025B9E /* VirtualMachine.cpp */,
+				98E737A1244A312F00995CDE /* Agent.hpp */,
+				98E73791244A06C000995CDE /* Fitness.hpp */,
+				98E7379D244A307A00995CDE /* Selection.hpp */,
+				98E73797244A0E9F00995CDE /* Crossing.hpp */,
+				98E737A7244A47D000995CDE /* Mutation.hpp */,
+				98E7378D244A015A00995CDE /* Evolution.hpp */,
+				98E7378C244A015A00995CDE /* Evolution.cpp */,
 			);
 			path = "Assignment-3";
 			sourceTree = "<group>";
@@ -100,6 +124,10 @@
 				980DECAC24485B6E00025B9E /* InstructionTests.mm */,
 				980DECB82448613600025B9E /* ProgramTests.mm */,
 				985906232448A8E000397621 /* VirtualMachineTests.mm */,
+				98E73794244A085000995CDE /* FitnessTests.mm */,
+				98E737A4244A33A200995CDE /* SelectionTests.mm */,
+				98E7379A244A2E4100995CDE /* CrossingTests.mm */,
+				98E737AA244A4AB900995CDE /* MutationTests.mm */,
 				980DECA02448595F00025B9E /* Info.plist */,
 			);
 			path = Assignment3Tests;
@@ -193,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				980DEC92244858DC00025B9E /* main.cpp in Sources */,
+				98E7378E244A015A00995CDE /* Evolution.cpp in Sources */,
 				980DECB024485CFC00025B9E /* VirtualMachine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,8 +231,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				980DECAD24485B6E00025B9E /* InstructionTests.mm in Sources */,
+				98E7378F244A015A00995CDE /* Evolution.cpp in Sources */,
 				980DECB92448613600025B9E /* ProgramTests.mm in Sources */,
 				980DECBF2448696200025B9E /* MapTests.mm in Sources */,
+				98E73795244A085000995CDE /* FitnessTests.mm in Sources */,
+				98E737A5244A33A200995CDE /* SelectionTests.mm in Sources */,
+				98E737AB244A4AB900995CDE /* MutationTests.mm in Sources */,
+				98E7379B244A2E4100995CDE /* CrossingTests.mm in Sources */,
 				980DECB124485CFC00025B9E /* VirtualMachine.cpp in Sources */,
 				985906242448A8E000397621 /* VirtualMachineTests.mm in Sources */,
 			);
@@ -344,6 +378,7 @@
 		980DECA22448595F00025B9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Assignment3Tests/Info.plist;
@@ -360,6 +395,7 @@
 		980DECA32448595F00025B9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Assignment3Tests/Info.plist;

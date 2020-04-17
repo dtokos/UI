@@ -107,7 +107,7 @@ bool VirtualMachine::isOutOfBounds() {
 	);
 }
 
-bool VirtualMachine::isOnTreasure() {
+bool VirtualMachine::isOnTreasure() const {
 	return map.isOnTreasure(playerPosition);
 }
 
