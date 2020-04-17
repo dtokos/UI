@@ -28,4 +28,21 @@
 	XCTAssertEqual(i, 0b10000000);
 }
 
+-(void)testInvertMutateAll {
+	Agent a{Program::random()};
+	vector<Agent> p{a};
+	InvertMutation m;
+	m.mutate(p);
+	bool allSame = true;
+	
+	for (int i = 0; i < a.program.size(); i++) {
+		if (p[0].program[i] != a.program[i]) {
+			allSame = false;
+			break;
+		}
+	}
+	
+	XCTAssertFalse(allSame);
+}
+
 @end

@@ -16,7 +16,7 @@ struct SliceCrossing : public Crossing {
 		child.fitness = -1;
 		
 		for (int i = 0; i < pa.program.size(); i++)
-			child.program[i] = generateInstruction(pa.program[i], pb.program[i], rand() / RAND_MAX);
+			child.program[i] = generateInstruction(pa.program[i], pb.program[i], rand() / static_cast<float>(RAND_MAX));
 		
 		return child;
 	}

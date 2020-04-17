@@ -28,4 +28,21 @@
 	XCTAssertEqual(g.generateInstruction(i1, i2, 1.0), i2);
 }
 
+-(void)testSliceCrossingGenerate {
+	Agent a1{Program::random()};
+	Agent a2{Program::random()};
+	SliceCrossing g;
+	Agent r = g.generate(a1, a2);
+	bool allSame = true;
+	
+	for (int i = 0; i < a1.program.size(); i++) {
+		if (r.program[i] != a1.program[i] && r.program[i] != a1.program[i]) {
+			allSame = false;
+			break;
+		}
+	}
+	
+	XCTAssertFalse(allSame);
+}
+
 @end

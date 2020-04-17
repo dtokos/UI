@@ -16,6 +16,21 @@ using namespace std;
 
 class Evolution {
 public:
+	struct Config {
+		Fitness *fitness;
+		Selection *selection;
+		Crossing *generator;
+		Mutation *mutation;
+		VirtualMachine vm;
+	};
+	
+	Evolution(const Config &c) :
+		fitness(c.fitness),
+		selection(c.selection),
+		generator(c.generator),
+		mutation(c.mutation),
+		vm(c.vm) {}
+	// TODO: Refactor rnd generation
 	// TODO: Change return type
 	void start(const Map &map, int populationSize, int populationLimit);
 	
@@ -27,7 +42,6 @@ private:
 	
 	VirtualMachine vm;
 	vector<Agent> population, nextPopulation;
-	int populationCount, populationLimit;
 	
 	void createRandomPopulation(int populationSize);
 	optional<Agent> executeAndCalculateFitnesses(const Map &map);

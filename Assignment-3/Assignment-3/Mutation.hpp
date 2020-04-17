@@ -17,8 +17,8 @@ struct InvertMutation : public Mutation {
 	void mutate(vector<Agent> &population) {
 		for (auto &a : population)
 			for (auto &i : a.program.instructions)
-				if (rand() / RAND_MAX > limit)
-					mutateInstruction(i, rand() / RAND_MAX);
+				if (rand() / static_cast<float>(RAND_MAX) > limit)
+					mutateInstruction(i, rand() / static_cast<float>(RAND_MAX));
 	}
 	
 	virtual void mutateInstruction(Instruction &instruction, float chance) {
