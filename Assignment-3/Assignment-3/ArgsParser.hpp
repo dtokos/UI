@@ -30,9 +30,13 @@ private:
 	
 	template<typename T>
 	T parseArg(const string &name);
+	float parseChance(const string &name);
+	int parseInt(const string &name, int min);
 	
+	Map::Vector parseVector(const string &value, const string &delimiter, const Map::Vector &min, const Map::Vector &max);
+	Map::Vector parseVector(const string &value, const string &delimiter, const Map::Vector &min);
 	Map::Vector parseVector(const string &value, const string &delimiter);
-	vector<Map::Vector> parseTreasures();
+	vector<Map::Vector> parseTreasures(const Map::Vector &size);
 	vector<string> split(const string &value, const string &delimiter);
 };
 
