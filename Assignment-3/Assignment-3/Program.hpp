@@ -1,8 +1,9 @@
 #ifndef Program_hpp
 #define Program_hpp
 
-#include "Instruction.hpp"
 #include <array>
+#include "Instruction.hpp"
+#include "Random.hpp"
 
 using namespace std;
 
@@ -13,8 +14,10 @@ struct Program {
 	
 	static Program random() {
 		array<Instruction, 64> instructions;
+		RandRandom rnd;
+		
 		for (auto &instruction : instructions)
-			instruction.raw = rand() % 256;
+			instruction.raw = rnd.to(256);
 		
 		return Program{instructions};
 	}

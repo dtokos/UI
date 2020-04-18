@@ -1,15 +1,17 @@
 #include <iostream>
 #include "Evolution.hpp"
+#include "Random.hpp"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+	RandRandom r;
 	TreasureDistanceFitness f;
 	RouletteSelection s;
-	SliceCrossing g;
-	InvertMutation m;
+	SliceCrossing g{&r};
+	InvertMutation m{&r};
 	VirtualMachine vm{false, 100};
-	Evolution::Config c {&f, &s, &g, &m, vm};
+	Evolution::Config c {&r, &f, &s, &g, &m, vm};
 	Evolution e{c};
 	
 	Map map{{5, 5}, {0, 0}, {{4, 4}}};

@@ -47,7 +47,7 @@ void Evolution::pickParentsAndCreateChildren() {
 	nextPopulation.clear();
 	
 	for (int i = 0; i < population.size(); i++)
-		nextPopulation.emplace_back(generator->generate(selection->pick(population, rand() / static_cast<float>(RAND_MAX)), selection->pick(population, rand() / static_cast<float>(RAND_MAX))));
+		nextPopulation.emplace_back(generator->generate(selection->pick(population, random->chance()), selection->pick(population, random->chance())));
 }
 
 void Evolution::mutateChildren() {

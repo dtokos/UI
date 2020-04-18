@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <optional>
+#include "Random.hpp"
 #include "Map.hpp"
 #include "Program.hpp"
 #include "VirtualMachine.hpp"
@@ -17,6 +18,7 @@ using namespace std;
 class Evolution {
 public:
 	struct Config {
+		Random *random;
 		Fitness *fitness;
 		Selection *selection;
 		Crossing *generator;
@@ -25,16 +27,17 @@ public:
 	};
 	
 	Evolution(const Config &c) :
+		random(c.random),
 		fitness(c.fitness),
 		selection(c.selection),
 		generator(c.generator),
 		mutation(c.mutation),
 		vm(c.vm) {}
-	// TODO: Refactor rnd generation
 	// TODO: Change return type
 	void start(const Map &map, int populationSize, int populationLimit);
 	
 private:
+	Random *random;
 	Fitness *fitness;
 	Selection *selection;
 	Crossing *generator;

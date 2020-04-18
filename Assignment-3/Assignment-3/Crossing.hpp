@@ -1,6 +1,7 @@
 #ifndef Crossing_hpp
 #define Crossing_hpp
 
+#include "Random.hpp"
 #include "Agent.hpp"
 
 using namespace std;
@@ -11,12 +12,14 @@ struct Crossing {
 };
 
 struct SliceCrossing : public Crossing {
+	SliceCrossing(Random *rnd) : rnd(rnd) {}
+	
 	Agent generate(const Agent &pa, const Agent &pb) {
 		Agent child;
 		child.fitness = -1;
 		
 		for (int i = 0; i < pa.program.size(); i++)
-			child.program[i] = generateInstruction(pa.program[i], pb.program[i], rand() / static_cast<float>(RAND_MAX));
+			child.program[i] = generateInstruction(pa.program[i], pb.program[i], rnd->chance());
 		
 		return child;
 	}
@@ -25,6 +28,9 @@ struct SliceCrossing : public Crossing {
 		uint8_t mask = ~0 << (uint8_t)(chance * 8);
 		return Instruction{static_cast<uint8_t>((pa.raw & mask) | (pb.raw & ~mask))};
 	}
+	
+private:
+	Random *rnd;
 };
 
 #endif

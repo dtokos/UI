@@ -2,6 +2,7 @@
 #define Mutation_hpp
 
 #include <vector>
+#include "Random.hpp"
 #include "Agent.hpp"
 
 using namespace std;
@@ -12,13 +13,13 @@ struct Mutation {
 };
 
 struct InvertMutation : public Mutation {
-	InvertMutation(float l = 0.7) : limit(l) {}
+	InvertMutation(Random *rnd, float l = 0.7) : rnd(rnd), limit(l) {}
 	
 	void mutate(vector<Agent> &population) {
 		for (auto &a : population)
 			for (auto &i : a.program.instructions)
-				if (rand() / static_cast<float>(RAND_MAX) > limit)
-					mutateInstruction(i, rand() / static_cast<float>(RAND_MAX));
+				if (rnd->chance() > limit)
+					mutateInstruction(i, rnd->chance());
 	}
 	
 	virtual void mutateInstruction(Instruction &instruction, float chance) {
@@ -26,6 +27,7 @@ struct InvertMutation : public Mutation {
 	}
 
 private:
+	Random *rnd;
 	float limit;
 };
 
