@@ -21,7 +21,7 @@ public:
 		Random *random;
 		Fitness *fitness;
 		Selection *selection;
-		Crossing *generator;
+		Crossing *crossing;
 		Mutation *mutation;
 		VirtualMachine vm;
 	};
@@ -30,7 +30,7 @@ public:
 		random(c.random),
 		fitness(c.fitness),
 		selection(c.selection),
-		generator(c.generator),
+		crossing(c.crossing),
 		mutation(c.mutation),
 		vm(c.vm) {}
 	// TODO: Change return type
@@ -40,7 +40,7 @@ private:
 	Random *random;
 	Fitness *fitness;
 	Selection *selection;
-	Crossing *generator;
+	Crossing *crossing;
 	Mutation *mutation;
 	
 	VirtualMachine vm;
