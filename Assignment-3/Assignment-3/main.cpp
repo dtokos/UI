@@ -1,22 +1,15 @@
 #include <iostream>
 #include "Evolution.hpp"
-#include "Random.hpp"
+#include "ArgsParser.hpp"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-	RandRandom r;
-	TreasureDistanceFitness f;
-	RouletteSelection s;
-	SliceCrossing g{&r};
-	InvertMutation m{&r};
-	VirtualMachine vm{false, 100};
-	Evolution::Config c {&r, &f, &s, &g, &m, vm};
-	Evolution e{c};
+	ArgsParser parser;
+	ArgsParser::Args args = parser.parse(argc, argv);
+	Evolution e{args.config};
 	
-	Map map{{5, 5}, {0, 0}, {{4, 4}}};
-	
-	e.start(map, 20, 10);
+	e.start(args.map, args.populationSize, args.populationLimit);
 	
 	return 0;
 }

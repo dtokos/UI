@@ -71,6 +71,16 @@
             ReferencedContainer = "container:Assignment-3.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "1,1 5x5 4,4 1,1 3,3"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "1,1 5x5 4,4 1,1 3,3 --tdf_sw=5 --im_limit=0.5 --vm_stae=false --vm_il=100 --ev_pl=50 --ev_ps=10"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

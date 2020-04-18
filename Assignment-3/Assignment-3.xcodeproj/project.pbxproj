@@ -14,6 +14,9 @@
 		980DECB92448613600025B9E /* ProgramTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 980DECB82448613600025B9E /* ProgramTests.mm */; };
 		980DECBF2448696200025B9E /* MapTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 980DECBE2448696200025B9E /* MapTests.mm */; };
 		983A1857244B2B5A00326C83 /* RandomTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 983A1856244B2B5A00326C83 /* RandomTests.mm */; };
+		983A185A244B353900326C83 /* ArgsParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 983A1858244B353900326C83 /* ArgsParser.cpp */; };
+		983A185B244B353900326C83 /* ArgsParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 983A1858244B353900326C83 /* ArgsParser.cpp */; };
+		983A185D244B5FA800326C83 /* ArgsParserTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 983A185C244B5FA800326C83 /* ArgsParserTests.mm */; };
 		985906242448A8E000397621 /* VirtualMachineTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 985906232448A8E000397621 /* VirtualMachineTests.mm */; };
 		98E7378E244A015A00995CDE /* Evolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E7378C244A015A00995CDE /* Evolution.cpp */; };
 		98E7378F244A015A00995CDE /* Evolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E7378C244A015A00995CDE /* Evolution.cpp */; };
@@ -50,6 +53,9 @@
 		980DECBE2448696200025B9E /* MapTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MapTests.mm; sourceTree = "<group>"; };
 		983A1854244B2A5A00326C83 /* Random.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Random.hpp; sourceTree = "<group>"; };
 		983A1856244B2B5A00326C83 /* RandomTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RandomTests.mm; sourceTree = "<group>"; };
+		983A1858244B353900326C83 /* ArgsParser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArgsParser.cpp; sourceTree = "<group>"; };
+		983A1859244B353900326C83 /* ArgsParser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArgsParser.hpp; sourceTree = "<group>"; };
+		983A185C244B5FA800326C83 /* ArgsParserTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ArgsParserTests.mm; sourceTree = "<group>"; };
 		985906232448A8E000397621 /* VirtualMachineTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VirtualMachineTests.mm; sourceTree = "<group>"; };
 		98E7378C244A015A00995CDE /* Evolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Evolution.cpp; sourceTree = "<group>"; };
 		98E7378D244A015A00995CDE /* Evolution.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Evolution.hpp; sourceTree = "<group>"; };
@@ -104,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				980DEC91244858DC00025B9E /* main.cpp */,
+				983A1859244B353900326C83 /* ArgsParser.hpp */,
+				983A1858244B353900326C83 /* ArgsParser.cpp */,
 				983A1854244B2A5A00326C83 /* Random.hpp */,
 				980DECBB2448660300025B9E /* Map.hpp */,
 				980DECA9244859BB00025B9E /* Instruction.hpp */,
@@ -124,6 +132,7 @@
 		980DEC9D2448595F00025B9E /* Assignment3Tests */ = {
 			isa = PBXGroup;
 			children = (
+				983A185C244B5FA800326C83 /* ArgsParserTests.mm */,
 				983A1856244B2B5A00326C83 /* RandomTests.mm */,
 				980DECBE2448696200025B9E /* MapTests.mm */,
 				980DECAC24485B6E00025B9E /* InstructionTests.mm */,
@@ -226,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				980DEC92244858DC00025B9E /* main.cpp in Sources */,
+				983A185A244B353900326C83 /* ArgsParser.cpp in Sources */,
 				98E7378E244A015A00995CDE /* Evolution.cpp in Sources */,
 				980DECB024485CFC00025B9E /* VirtualMachine.cpp in Sources */,
 			);
@@ -236,9 +246,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				980DECAD24485B6E00025B9E /* InstructionTests.mm in Sources */,
+				983A185B244B353900326C83 /* ArgsParser.cpp in Sources */,
 				98E7378F244A015A00995CDE /* Evolution.cpp in Sources */,
 				980DECB92448613600025B9E /* ProgramTests.mm in Sources */,
 				983A1857244B2B5A00326C83 /* RandomTests.mm in Sources */,
+				983A185D244B5FA800326C83 /* ArgsParserTests.mm in Sources */,
 				980DECBF2448696200025B9E /* MapTests.mm in Sources */,
 				98E73795244A085000995CDE /* FitnessTests.mm in Sources */,
 				98E737A5244A33A200995CDE /* SelectionTests.mm in Sources */,
@@ -368,6 +380,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-ldocopt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -377,6 +392,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-ldocopt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -387,12 +405,15 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = Assignment3Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-ldocopt";
 				PRODUCT_BUNDLE_IDENTIFIER = dtokos.Assignment3Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -404,12 +425,15 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = Assignment3Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-ldocopt";
 				PRODUCT_BUNDLE_IDENTIFIER = dtokos.Assignment3Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
