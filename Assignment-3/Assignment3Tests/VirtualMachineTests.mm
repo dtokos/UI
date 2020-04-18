@@ -143,4 +143,15 @@
 	XCTAssertEqual(r.collectedTreasures, m.treasureCount());
 }
 
+-(void)testPath {
+	Program p{{0b11000000, 0b11000001, 0b11000000}};
+	Map m{{2, 3}, {1, 0}, {{1, 1}, {0, 1}, {0, 2}}};
+	VirtualMachine vm{true, 100};
+	auto r = vm.execute<true>(p, m);
+	XCTAssertEqual(r.path.size(), 3);
+	XCTAssertEqual(r.path[0], Instruction::Direction::Top);
+	XCTAssertEqual(r.path[1], Instruction::Direction::Left);
+	XCTAssertEqual(r.path[2], Instruction::Direction::Top);
+}
+
 @end

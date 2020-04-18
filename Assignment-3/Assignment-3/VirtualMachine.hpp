@@ -24,6 +24,7 @@ public:
 		int instructionsExecuted;
 		int collectedTreasures;
 		Termination termination;
+		vector<Instruction::Direction> path;
 		Program program;
 	};
 	
@@ -32,6 +33,7 @@ public:
 		int instructionsExecuted;
 		int collectedTreasures;
 		Termination termination;
+		vector<Instruction::Direction> path;
 	};
 	
 	VirtualMachine(bool stae, int il);
@@ -45,6 +47,7 @@ private:
 	Map::Vector playerPosition;
 	int instructionsExecuted, instructionIndex;
 	set<Map::Vector> collectedTreasures;
+	vector<Instruction::Direction> path;
 	Program program;
 	const Map *map;
 	

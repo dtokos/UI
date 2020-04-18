@@ -36,6 +36,7 @@ VirtualMachine::Result<B> VirtualMachine::execute(const Program &p, const Map &m
 void VirtualMachine::prepare(const Program &p, const Map &m) {
 	program = p;
 	map = &m;
+	path.clear();
 	instructionsExecuted = 0;
 	collectedTreasures.clear();
 	playerPosition = m.start;
@@ -44,9 +45,9 @@ void VirtualMachine::prepare(const Program &p, const Map &m) {
 template <bool B>
 VirtualMachine::Result<B> VirtualMachine::result(const Termination &t) {
 	if constexpr (B)
-		return Result<true>{instructionsExecuted, static_cast<int>(collectedTreasures.size()), t, program};
+		return Result<true>{instructionsExecuted, static_cast<int>(collectedTreasures.size()), t, path, program};
 	else
-		return Result<false>{instructionsExecuted, static_cast<int>(collectedTreasures.size()), t};
+		return Result<false>{instructionsExecuted, static_cast<int>(collectedTreasures.size()), t, path};
 }
 
 void VirtualMachine::executeInstruction() {
@@ -91,18 +92,22 @@ void VirtualMachine::print(uint8_t address) {
 	switch (program[address].direction()) {
 		case Instruction::Direction::Top:
 			playerPosition.y++;
+			path.emplace_back(Instruction::Direction::Top);
 			break;
 			
 		case Instruction::Direction::Left:
 			playerPosition.x--;
+			path.emplace_back(Instruction::Direction::Left);
 			break;
 			
 		case Instruction::Direction::Right:
 			playerPosition.x++;
+			path.emplace_back(Instruction::Direction::Right);
 			break;
 			
 		case Instruction::Direction::Bottom:
 			playerPosition.y--;
+			path.emplace_back(Instruction::Direction::Bottom);
 			break;
 	}
 }
