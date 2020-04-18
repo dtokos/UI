@@ -11,7 +11,7 @@
 	Program p{{0b00000000}};
 	Map m{{1, 1}, {0, 0}, {{1, 1}}};
 	VirtualMachine vm{true, 1};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.program[0], p[0] + 1);
 }
 
@@ -19,7 +19,7 @@
 	Program p{{0b00000010, 0b00000010}};
 	Map m{{1, 1}, {0, 0}, {{1, 1}}};
 	VirtualMachine vm{true, 2};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.program[2], p[2] + 2);
 }
 
@@ -27,7 +27,7 @@
 	Program p{{0b00000001, 0b11111111, 0b00000000}};
 	Map m{{1, 1}, {0, 0}, {{1, 1}}};
 	VirtualMachine vm{true, 1};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.program[1], p[2]);
 }
 
@@ -35,7 +35,7 @@
 	Program p{{0b01000000}};
 	Map m{{1, 1}, {0, 0}, {{1, 1}}};
 	VirtualMachine vm{true, 1};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.program[0], p[0] - 1);
 }
 
@@ -43,7 +43,7 @@
 	Program p{{0b01000010, 0b01000010, 0b00000010}};
 	Map m{{1, 1}, {0, 0}, {{1, 1}}};
 	VirtualMachine vm{true, 2};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.program[2], p[2] - 2);
 }
 
@@ -51,7 +51,7 @@
 	Program p{{0b01000001, 0b00000000, 0b11111111}};
 	Map m{{1, 1}, {0, 0}, {{1, 1}}};
 	VirtualMachine vm{true, 1};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.program[1], p[2]);
 }
 
@@ -59,7 +59,7 @@
 	Program p{{0b10000010, 0b00000000, 0b00000011, 0b00000000}};
 	Map m{{1, 1}, {0, 0}, {{1, 1}}};
 	VirtualMachine vm{true, 2};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.program[3], p[3] + 1);
 }
 
@@ -67,7 +67,7 @@
 	Program p{{0b11000000}};
 	Map m{{2, 2}, {0, 0}, {{0, 1}}};
 	VirtualMachine vm{true, 1};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.collectedTreasures, 1);
 }
 
@@ -75,7 +75,7 @@
 	Program p;
 	Map m{{10, 10}, {0, 0}, {{9, 9}}};
 	VirtualMachine vm{true, 5};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::InstructionLimit);
 }
 
@@ -83,7 +83,7 @@
 	Program p;
 	Map m{{10, 10}, {0, 0}, {{9, 9}}};
 	VirtualMachine vm{true, 100};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::EndOfProgram);
 	XCTAssertEqual(r.instructionsExecuted, p.size());
 }
@@ -92,7 +92,7 @@
 	Program p;
 	Map m{{10, 10}, {0, 0}, {{9, 9}}};
 	VirtualMachine vm{false, 100};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::InstructionLimit);
 	XCTAssertEqual(r.instructionsExecuted, 100);
 }
@@ -101,7 +101,7 @@
 	Program p{{0b11000000, 0b11000000, 0b11000000}};
 	Map m{{5, 2}, {0, 0}, {{9, 9}}};
 	VirtualMachine vm{true, 100};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::OutOfBounds);
 	XCTAssertEqual(r.instructionsExecuted, 2);
 }
@@ -110,7 +110,7 @@
 	Program p{{0b11000001, 0b11000001, 0b11000001}};
 	Map m{{2, 5}, {1, 0}, {{9, 9}}};
 	VirtualMachine vm{true, 100};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::OutOfBounds);
 	XCTAssertEqual(r.instructionsExecuted, 2);
 }
@@ -119,7 +119,7 @@
 	Program p{{0b11000010, 0b11000010, 0b11000010}};
 	Map m{{2, 5}, {0, 0}, {{9, 9}}};
 	VirtualMachine vm{true, 100};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::OutOfBounds);
 	XCTAssertEqual(r.instructionsExecuted, 2);
 }
@@ -128,7 +128,7 @@
 	Program p{{0b11000011, 0b11000011, 0b11000011, 0b11000011}};
 	Map m{{5, 2}, {0, 1}, {{9, 9}}};
 	VirtualMachine vm{true, 100};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::OutOfBounds);
 	XCTAssertEqual(r.instructionsExecuted, 2);
 }
@@ -137,7 +137,7 @@
 	Program p{{0b11000000, 0b11000001, 0b11000000}};
 	Map m{{2, 3}, {1, 0}, {{1, 1}, {0, 1}, {0, 2}}};
 	VirtualMachine vm{true, 100};
-	VirtualMachine::Result r = vm.execute(p, m);
+	auto r = vm.execute<true>(p, m);
 	XCTAssertEqual(r.termination, VirtualMachine::Success);
 	XCTAssertEqual(r.instructionsExecuted, 3);
 	XCTAssertEqual(r.collectedTreasures, m.treasureCount());

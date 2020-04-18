@@ -9,19 +9,19 @@
 
 -(void)testTreasureDistance {
 	TreasureDistanceFitness f{0.001};
-	VirtualMachine::Result r{5, 10};
+	VirtualMachine::Result<false> r{5, 10};
 	XCTAssertEqualWithAccuracy(f.calculate(r), 1.0 + 10 - 5 * 0.001, 0.001);
 }
 
 -(void)testTreasureDistanceStepWeight {
 	TreasureDistanceFitness f{1};
-	VirtualMachine::Result r{5, 10};
+	VirtualMachine::Result<false> r{5, 10};
 	XCTAssertEqualWithAccuracy(f.calculate(r), 1.0 + 10 - 5 * 1, 0.001);
 }
 
 -(void)testTreasureDistanceNoSteps {
 	TreasureDistanceFitness f{0.001};
-	VirtualMachine::Result r{0, 0};
+	VirtualMachine::Result<false> r{0, 0};
 	XCTAssertEqualWithAccuracy(f.calculate(r), 1.0, 0.001);
 }
 

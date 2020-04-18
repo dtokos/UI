@@ -16,15 +16,27 @@ public:
 		Success,
 	};
 	
-	struct Result {
+	template <bool>
+	struct Result {};
+	
+	template <>
+	struct Result<true> {
 		int instructionsExecuted;
 		int collectedTreasures;
 		Termination termination;
 		Program program;
 	};
 	
+	template<>
+	struct Result<false> {
+		int instructionsExecuted;
+		int collectedTreasures;
+		Termination termination;
+	};
+	
 	VirtualMachine(bool stae, int il);
-	Result execute(const Program &program, const Map &map);
+	template <bool B>
+	Result<B> execute(const Program &program, const Map &map);
 	
 private:
 	bool shouldTerminateAtEnd;
@@ -37,6 +49,8 @@ private:
 	const Map *map;
 	
 	void prepare(const Program &program, const Map &map);
+	template <bool B>
+	Result<B> result(const Termination &t);
 	void executeInstruction();
 	Instruction &currentInstruction();
 	

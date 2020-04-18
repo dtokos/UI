@@ -31,7 +31,7 @@ void Evolution::createRandomPopulation(int ps) {
 
 optional<Agent> Evolution::executeAndCalculateFitnesses(const Map &m) {
 	for (auto &agent : population) {
-		VirtualMachine::Result r = vm.execute(agent.program, m);
+		auto r = vm.execute<false>(agent.program, m);
 		
 		if (r.termination == VirtualMachine::Termination::Success)
 			return agent;

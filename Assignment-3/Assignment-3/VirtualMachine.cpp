@@ -4,7 +4,8 @@ VirtualMachine::VirtualMachine(bool stae, int il) :
 	shouldTerminateAtEnd(stae),
 	instructionLimit(il) {}
 
-VirtualMachine::Result VirtualMachine::execute(const Program &p, const Map &m) {
+template <bool B>
+VirtualMachine::Result<B> VirtualMachine::execute(const Program &p, const Map &m) {
 	prepare(p, m);
 	
 	for (instructionIndex = 0; instructionsExecuted < instructionLimit;) {
@@ -12,24 +13,24 @@ VirtualMachine::Result VirtualMachine::execute(const Program &p, const Map &m) {
 		instructionsExecuted++;
 		
 		if (isOutOfBounds())
-			return Result{instructionsExecuted, static_cast<int>(collectedTreasures.size()), OutOfBounds, program};
+			return result<B>(OutOfBounds);
 		
 		if (isOnTreasure() && treasureWasNotCollected())
 			collect();
 		
 		if (didCollectAllTreasures())
-			return Result{instructionsExecuted, static_cast<int>(collectedTreasures.size()), Success, program};
+			return result<B>(Success);
 		
 		if (didExecuteAllInstructions()) {
 			if (shouldTerminateAtEnd)
-				return Result{instructionsExecuted, static_cast<int>(collectedTreasures.size()), EndOfProgram, program};
+				return result<B>(EndOfProgram);
 			else
 				jumpToStart();
 		} else
 			instructionIndex++;
 	}
 	
-	return Result{instructionsExecuted, static_cast<int>(collectedTreasures.size()), InstructionLimit, program};
+	return result<B>(InstructionLimit);
 }
 
 void VirtualMachine::prepare(const Program &p, const Map &m) {
@@ -38,6 +39,14 @@ void VirtualMachine::prepare(const Program &p, const Map &m) {
 	instructionsExecuted = 0;
 	collectedTreasures.clear();
 	playerPosition = m.start;
+}
+
+template <bool B>
+VirtualMachine::Result<B> VirtualMachine::result(const Termination &t) {
+	if constexpr (B)
+		return Result<true>{instructionsExecuted, static_cast<int>(collectedTreasures.size()), t, program};
+	else
+		return Result<false>{instructionsExecuted, static_cast<int>(collectedTreasures.size()), t};
 }
 
 void VirtualMachine::executeInstruction() {
@@ -130,3 +139,9 @@ bool VirtualMachine::didExecuteAllInstructions() {
 void VirtualMachine::jumpToStart() {
 	instructionIndex = 0;
 }
+
+template VirtualMachine::Result<false> VirtualMachine::execute(const Program &p, const Map &m);
+template VirtualMachine::Result<true> VirtualMachine::execute(const Program &p, const Map &m);
+
+template VirtualMachine::Result<false> VirtualMachine::result(const Termination &t);
+template VirtualMachine::Result<true> VirtualMachine::result(const Termination &t);
