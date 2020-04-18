@@ -32,11 +32,11 @@ struct Instruction {
 	bool operator==(int n) const {return raw == n;}
 	bool operator!=(const Instruction& b) const {return raw != b.raw;}
 	
-	Type type() {
+	Type type() const {
 		return static_cast<Type>(raw & 0b11'000000);
 	}
 	
-	uint8_t address() {
+	uint8_t address() const {
 		return raw & 0b00'111111;
 	}
 								 

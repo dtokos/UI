@@ -26,6 +26,13 @@ public:
 		VirtualMachine vm;
 	};
 	
+	struct Result {
+		bool success;
+		int populationNumber;
+		Program program;
+		vector<Instruction::Direction> path;
+	};
+	
 	Evolution(const Config &c) :
 		random(c.random),
 		fitness(c.fitness),
@@ -33,8 +40,8 @@ public:
 		crossing(c.crossing),
 		mutation(c.mutation),
 		vm(c.vm) {}
-	// TODO: Change return type
-	void start(const Map &map, int populationSize, int populationLimit);
+	
+	Result start(const Map &map, int populationSize, int populationLimit);
 	
 private:
 	Random *random;
@@ -47,12 +54,11 @@ private:
 	vector<Agent> population, nextPopulation;
 	
 	void createRandomPopulation(int populationSize);
-	optional<Agent> executeAndCalculateFitnesses(const Map &map);
+	optional<Evolution::Result> executeAndCalculateFitnesses(const Map &map, int populationNumber);
 	void pickParentsAndCreateChildren();
 	void mutateChildren();
 	void swapPopulation();
-	// TODO: Change return type
-	void currentlyBestAgent();
+	Evolution::Result currentlyBestAgent(const Map &map, int populationLimit);
 };
 
 #endif
