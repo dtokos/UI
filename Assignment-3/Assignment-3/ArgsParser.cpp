@@ -65,30 +65,28 @@ bool ArgsParser::parseArg<bool>(const string &name) {
 	else if (arg == "false" || arg == "0")
 		return false;
 	else
-		throw invalid_argument("Argument " + name + " is not boolean");
+		throw invalid_argument(name);
 }
 
 template<>
 int ArgsParser::parseArg<int>(const string &name) {
-	const auto& arg = args[name].asString();
 	try {
-		return stoi(arg);
+		return stoi(args[name].asString());
 	} catch (const invalid_argument &e) {
-		throw invalid_argument("Argument " + name + " is not int");
+		throw invalid_argument(name);
 	} catch (const out_of_range &e) {
-		throw invalid_argument("Argument " + name + " is out of int range");
+		throw out_of_range(name);
 	}
 }
 
 template<>
 float ArgsParser::parseArg<float>(const string &name) {
-	const auto& arg = args[name].asString();
 	try {
-		return stof(arg);
+		return stof(args[name].asString());
 	} catch (const invalid_argument &e) {
-		throw invalid_argument("Argument " + name + " is not float");
+		throw invalid_argument(name);
 	} catch (const out_of_range &e) {
-		throw invalid_argument("Argument " + name + " is out of float range");
+		throw out_of_range(name);
 	}
 }
 
@@ -97,10 +95,10 @@ string ArgsParser::parseArg<string>(const string &name) {
 	return args[name].asString();
 }
 
-float ArgsParser::parseChance(const string &name) {
+float ArgsParser::parseFloat(const string &name, float min, float max) {
 	float chance = parseArg<float>(name);
-	if (chance < 0.0 || chance > 1.0)
-		throw range_error("Argument is out of range");
+	if (chance < min || chance > max)
+		throw out_of_range(name);
 	
 	return chance;
 }
@@ -108,20 +106,26 @@ float ArgsParser::parseChance(const string &name) {
 int ArgsParser::parseInt(const string &name, int min) {
 	int value = parseArg<int>(name);
 	if (value < min)
-		throw range_error("Argument is out of range");
+		throw out_of_range(name);
 	
 	return value;
 }
 
 ArgsParser::Args ArgsParser::parse(int argc, const char *argv[]) {
-	args = docopt::docopt(USAGE, {argv + 1, argv + argc}, true);
-	
-	return Args {
-		parseConfig(),
-		parseMap(),
-		parseInt("--ev_pl", 1),
-		parseInt("--ev_ps", 1),
-	};
+	try {
+		args = docopt::docopt(USAGE, {argv + 1, argv + argc}, true);
+		
+		return Args {
+			parseConfig(),
+			parseMap(),
+			parseInt("--ev_pl", 1),
+			parseInt("--ev_ps", 1),
+		};
+	} catch (const invalid_argument &e) {
+		throw ParsingError::invalid("Option", e.what());
+	} catch (const out_of_range &e) {
+		throw ParsingError::outOfRange("Option", e.what());
+	}
 }
 
 Evolution::Config ArgsParser::parseConfig() {
@@ -138,64 +142,116 @@ Evolution::Config ArgsParser::parseConfig() {
 }
 
 Fitness *ArgsParser::parseFitness() {
-	return new TreasureDistanceFitness(parseChance("--tdf_sw"));
+	try {
+		return new TreasureDistanceFitness(parseFloat("--tdf_sw", 0.0, 1.0));
+	} catch (const out_of_range &e) {
+		throw ParsingError::outOfRange("Option", e.what());
+	} catch (const invalid_argument &e) {
+		throw ParsingError::invalid("Option", e.what());
+	}
 }
 
 Mutation *ArgsParser::parseMutation(Random *rnd) {
-	return new InvertMutation(rnd, parseChance("--im_limit"));
+	try {
+		return new InvertMutation(rnd, parseFloat("--im_limit", 0.0, 1.0));
+	} catch (const out_of_range &e) {
+		throw ParsingError::outOfRange("Option", e.what());
+	} catch (const invalid_argument &e) {
+		throw ParsingError::invalid("Option", e.what());
+	}
 }
 
 VirtualMachine ArgsParser::parseVirtualMachine() {
-	return VirtualMachine{parseArg<bool>("--vm_stae"), parseInt("--vm_il", 1)};
+	try {
+		return VirtualMachine{parseArg<bool>("--vm_stae"), parseInt("--vm_il", 1)};
+	} catch (const out_of_range &e) {
+		throw ParsingError::outOfRange("Option", e.what());
+	} catch (const invalid_argument &e) {
+		throw ParsingError::invalid("Option", e.what());
+	}
 }
 
 Map ArgsParser::parseMap() {
-	const Map::Vector size = parseVector(parseArg<string>("<map_dimension>"), "x", {1, 1});
-	const Map::Vector start = parseVector(parseArg<string>("<start>"), ",", {1, 1}, size);
-	
-	return Map {
-		size,
-		Map::Vector{start.x - 1, start.y - 1},
-		parseTreasures(size),
-	};
-}
-
-Map::Vector ArgsParser::parseVector(const string &value, const string &delimiter, const Map::Vector &min, const Map::Vector &max) {
-	Map::Vector vec = parseVector(value, delimiter);
-	
-	if (vec.x < min.x || vec.y < min.y || vec.x > max.x || vec.y > max.y)
-		throw range_error("Argument is out of range");
-	
-	return vec;
-}
-
-Map::Vector ArgsParser::parseVector(const string &value, const string &delimiter, const Map::Vector &min) {
-	Map::Vector vec = parseVector(value, delimiter);
-	
-	if (vec.x < min.x || vec.y < min.y)
-		throw range_error("Argument is out of range");
-	
-	return vec;
-}
-
-Map::Vector ArgsParser::parseVector(const string &value, const string &delimiter) {
-	vector<string> parts = split(value, delimiter);
-	if (parts.size() != 2)
-		throw invalid_argument("Invalid number of arguments passed to vector");
+	try {
+		const Map::Vector size = parseVector("<map_dimension>", "x", {1, 1});
+		const Map::Vector start = parseVector("<start>", ",", {1, 1}, size);
 		
-	return Map::Vector{stoi(parts[0]), stoi(parts[1])};
+		return Map {
+			size,
+			Map::Vector{start.x - 1, start.y - 1},
+			parseTreasures(size),
+		};
+	} catch (const invalid_argument &e) {
+		throw ParsingError::invalid("Argument", e.what());
+	} catch (const out_of_range &e) {
+		throw ParsingError::outOfRange("Argument", e.what());
+	}
+}
+
+Map::Vector ArgsParser::parseVector(const string &name, const string &delimiter, const Map::Vector &min) {
+	try {
+		return checkVectorSize(parseVector(name, delimiter), min);
+	} catch (const invalid_argument &e) {
+		throw invalid_argument(name);
+	} catch (const out_of_range &e) {
+		throw out_of_range(name);
+	}
+}
+
+Map::Vector ArgsParser::parseVector(const string &name, const string &delimiter, const Map::Vector &min, const Map::Vector &max) {
+	try {
+		return checkVectorSize(parseVector(name, delimiter), min, max);
+	} catch (const invalid_argument &e) {
+		throw invalid_argument(name);
+	} catch (const out_of_range &e) {
+		throw out_of_range(name);
+	}
+}
+
+Map::Vector ArgsParser::parseVector(const string &name, const string &delimiter) {
+	return parseVectorValue(parseArg<string>(name), delimiter);
 }
 
 vector<Map::Vector> ArgsParser::parseTreasures(const Map::Vector &size) {
-	vector<string> treasureArgs = args["<treasure>"].asStringList();
-	vector<Map::Vector> treasures;
+	constexpr char arg[] = "<treasure>";
 	
-	for (const auto &treasure : treasureArgs) {
-		const Map::Vector t = parseVector(treasure, ",", {1, 1}, size);
-		treasures.emplace_back(Map::Vector{t.x - 1, t.y - 1});
+	try {
+		vector<string> treasureArgs = args[arg].asStringList();
+		vector<Map::Vector> treasures;
+		
+		for (const auto &treasure : treasureArgs) {
+			const Map::Vector t = checkVectorSize(parseVectorValue(treasure, ","), {1, 1}, size);
+			treasures.emplace_back(Map::Vector{t.x - 1, t.y - 1});
+		}
+		
+		return treasures;
+	} catch (const invalid_argument &e) {
+		throw ParsingError::invalid("Argument", arg);
+	} catch (const out_of_range &e) {
+		throw ParsingError::outOfRange("Argument", arg);
 	}
+}
+
+Map::Vector ArgsParser::parseVectorValue(const string &value, const string &delimiter) {
+	vector<string> parts = split(value, delimiter);
+	if (parts.size() != 2)
+		throw invalid_argument("Invalid vector value");
 	
-	return treasures;
+	return Map::Vector{stoi(parts[0]), stoi(parts[1])};
+}
+
+Map::Vector ArgsParser::checkVectorSize(const Map::Vector &vec, const Map::Vector &min) {
+	if (vec.x < min.x || vec.y < min.y)
+		throw out_of_range("Vector is out of range");
+	
+	return vec;
+}
+
+Map::Vector ArgsParser::checkVectorSize(const Map::Vector &vec, const Map::Vector &min, const Map::Vector &max) {
+	if (vec.x < min.x || vec.y < min.y || vec.x > max.x || vec.y > max.y)
+		throw out_of_range("Vector is out of range");
+	
+	return vec;
 }
 
 vector<string> ArgsParser::split(const string &value, const string &delimiter) {

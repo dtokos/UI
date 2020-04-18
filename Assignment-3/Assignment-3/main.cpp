@@ -5,11 +5,16 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-	ArgsParser parser;
-	ArgsParser::Args args = parser.parse(argc, argv);
-	Evolution e{args.config};
-	
-	e.start(args.map, args.populationSize, args.populationLimit);
-	
-	return 0;
+	try {
+		ArgsParser parser;
+		ArgsParser::Args args = parser.parse(argc, argv);
+		Evolution e{args.config};
+		
+		e.start(args.map, args.populationSize, args.populationLimit);
+		
+		return EXIT_SUCCESS;
+	} catch (const ArgsParser::ParsingError &e) {
+		cerr << e.what() << '\n';
+		return EXIT_FAILURE;
+	}
 }
