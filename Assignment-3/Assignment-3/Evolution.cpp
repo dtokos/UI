@@ -1,25 +1,19 @@
 #include "Evolution.hpp"
 
 Evolution::Result Evolution::start(const Map &m, int ps, int pl) {
-	// Create random population (min 20)
 	createRandomPopulation(ps);
 	
-	// Loop
 	for (int populationCount = 0; populationCount < pl; populationCount++) {
-		// Calculate fitness for every agent
-		auto result = executeAndCalculateFitnesses(m, populationCount);
-		// If agent collected all treasures then return
+		auto result = executeAndCalculateFitnesses(m, populationCount + 1);
+		
 		if (result != nullopt)
 			return *result;
-		// Find parents and create children
+		
 		pickParentsAndCreateChildren();
-		// Mutate children
 		mutateChildren();
-		// Swap population
 		swapPopulation();
 	}
 	
-	// If reached population limit then return currently best agent
 	return currentlyBestAgent(m, pl);
 }
 

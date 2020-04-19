@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "980DEC8D244858DC00025B9E"
-               BuildableName = "Assignment-3"
+               BuildableName = "treasure_hunter"
                BlueprintName = "Assignment-3"
                ReferencedContainer = "container:Assignment-3.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "980DEC8D244858DC00025B9E"
-            BuildableName = "Assignment-3"
+            BuildableName = "treasure_hunter"
             BlueprintName = "Assignment-3"
             ReferencedContainer = "container:Assignment-3.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "980DEC8D244858DC00025B9E"
-            BuildableName = "Assignment-3"
+            BuildableName = "treasure_hunter"
             BlueprintName = "Assignment-3"
             ReferencedContainer = "container:Assignment-3.xcodeproj">
          </BuildableReference>
@@ -99,7 +99,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "980DEC8D244858DC00025B9E"
-            BuildableName = "Assignment-3"
+            BuildableName = "treasure_hunter"
             BlueprintName = "Assignment-3"
             ReferencedContainer = "container:Assignment-3.xcodeproj">
          </BuildableReference>
