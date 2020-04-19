@@ -38,6 +38,7 @@ private:
 	map<string, docopt::value> args;
 	
 	Evolution::Config parseConfig();
+	Random *parseRandom();
 	Fitness *parseFitness();
 	Mutation *parseMutation(Random *rnd);
 	VirtualMachine parseVirtualMachine();

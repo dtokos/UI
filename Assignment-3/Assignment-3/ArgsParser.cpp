@@ -26,6 +26,10 @@ Examples:
 Options:
   -h --help          Show this screen.
   
+  --rnd_seed=S       Configures seed for RandRandom.
+                     Accepts values from N.
+                     [default: 1]
+  
   --tdf_sw=SW        Configures step weight for TreasureDistanceFitness.
                      Each step will decrease fitness by small amount.
                      Accepts values from range <0.0, 1.0>.
@@ -129,7 +133,7 @@ ArgsParser::Args ArgsParser::parse(int argc, const char *argv[]) {
 }
 
 Evolution::Config ArgsParser::parseConfig() {
-	Random *rnd = new RandRandom();
+	Random *rnd = parseRandom();
 	
 	return Evolution::Config{
 		rnd,
@@ -139,6 +143,18 @@ Evolution::Config ArgsParser::parseConfig() {
 		parseMutation(rnd),
 		parseVirtualMachine()
 	};
+}
+
+Random *ArgsParser::parseRandom() {
+	try {
+		Random *rnd = new RandRandom();
+		rnd->seed(parseInt("--rnd_seed", 0));
+		return rnd;
+	} catch (const out_of_range &e) {
+		throw ParsingError::outOfRange("Option", e.what());
+	} catch (const invalid_argument &e) {
+		throw ParsingError::invalid("Option", e.what());
+	}
 }
 
 Fitness *ArgsParser::parseFitness() {

@@ -68,6 +68,18 @@
 	XCTAssertNoThrow(p.parse(argv.size(), argv.data()));
 }
 
+-(void)testParseArg_rnd_seed_BelowRange {
+	std::array<const char *, 5> argv{"program", "3,3", "5x5", "3,3", "--rnd_seed=-1"};
+	ArgsParser p;
+	XCTAssertThrows(p.parse(argv.size(), argv.data()));
+}
+
+-(void)testParseArg_rnd_seed_InRange {
+	std::array<const char *, 5> argv{"program", "3,3", "5x5", "3,3", "--rnd_seed=0"};
+	ArgsParser p;
+	XCTAssertNoThrow(p.parse(argv.size(), argv.data()));
+}
+
 -(void)testParseArg_tdf_sw_BelowRange {
 	std::array<const char *, 5> argv{"program", "3,3", "5x5", "3,3", "--tdf_sw=-0.001"};
 	ArgsParser p;
