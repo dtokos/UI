@@ -1,13 +1,14 @@
 #include "ArgsParser.hpp"
 
 static const char USAGE[] =
-R"(Assignment.
+R"(Treasure Hunter
 
-Geneteic algorithm...
+This program finds agent, that will find all treasures on map.
+It does so by using evolution algorithms.
 
 Usage:
-  assignment <start> <map_dimension> <treasure>... [options]
-  assignment (-h | --help)
+  treasure_hunter <start> <map_dimension> <treasure>... [options]
+  treasure_hunter (-h | --help)
 
 Arguments:
   <start>            Determines starting position of player.
@@ -20,8 +21,8 @@ Arguments:
                      Expects string with format 'A,B' where A and B are from <1, map_dimension>.
 
 Examples:
-  assignment 0,0 5x5 1,2 3,4 4,2
-  assignment 0,0 5x5 1,2 3,4 4,2 --im_limit=20
+  treasure_hunter 0,0 5x5 1,2 3,4 4,2
+  treasure_hunter 0,0 5x5 1,2 3,4 4,2 --im_limit=20
 
 Options:
   -h --help          Show this screen.

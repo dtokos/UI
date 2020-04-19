@@ -39,7 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		980DEC8E244858DC00025B9E /* Assignment-3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment-3"; sourceTree = BUILT_PRODUCTS_DIR; };
+		980DEC8E244858DC00025B9E /* treasure_hunter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = treasure_hunter; sourceTree = BUILT_PRODUCTS_DIR; };
 		980DEC91244858DC00025B9E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		980DEC9C2448595F00025B9E /* Assignment3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		980DECA02448595F00025B9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		980DEC8F244858DC00025B9E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				980DEC8E244858DC00025B9E /* Assignment-3 */,
+				980DEC8E244858DC00025B9E /* treasure_hunter */,
 				980DEC9C2448595F00025B9E /* Assignment3Tests.xctest */,
 			);
 			name = Products;
@@ -164,7 +164,7 @@
 			);
 			name = "Assignment-3";
 			productName = "Assignment-3";
-			productReference = 980DEC8E244858DC00025B9E /* Assignment-3 */;
+			productReference = 980DEC8E244858DC00025B9E /* treasure_hunter */;
 			productType = "com.apple.product-type.tool";
 		};
 		980DEC9B2448595F00025B9E /* Assignment3Tests */ = {
@@ -383,7 +383,7 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = "-ldocopt";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = treasure_hunter;
 			};
 			name = Debug;
 		};
@@ -395,7 +395,7 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = "-ldocopt";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = treasure_hunter;
 			};
 			name = Release;
 		};
