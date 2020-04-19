@@ -37,7 +37,7 @@ void printResult(const Evolution::Result &r, const Map &m) {
 }
 
 void printPath(const vector<Instruction::Direction> &path, const Map &m) {
-	Map::Vector p = m.start;
+	Map::Vector p{m.start.x + 1, m.start.y + 1};
 	cout << "  Start  (" << p.x << ", " << p.y << ")\n";
 	for (const auto &d : path) {
 		switch (d) {
