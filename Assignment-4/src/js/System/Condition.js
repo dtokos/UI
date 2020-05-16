@@ -32,6 +32,18 @@ class Condition {
 		}, {});
 	}
 
+	specialMatch() {
+		return this.content.replace(/\s+/g, ' ')
+			.trim()
+			.split(' ')
+			.slice(1)
+			.reduce((acc, item) => {
+				if (item.startsWith('?')) acc.variables.push(item.substring(1));
+				else acc.constants.push(item);
+				return acc;
+			}, {variables: [], constants: []});
+	}
+
 	_match(pattern, value, all = true) {
 		if (all) return [...value.matchAll(pattern)].map(m => m.slice(1)).flat();
 		const matches = value.match(pattern);

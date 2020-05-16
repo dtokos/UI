@@ -1,44 +1,55 @@
 import Condition from './Condition';
+import Action from './Action';
 
 class ProductionSystem {
 	constructor(memory = [], rules = []) {
 		this.memory = memory;
 		this.rules = rules;
+		this.output = [];
 	}
 
 	executeStep() {
-		const applicableRules = this._findApplicableRules();
-		// TODO: Implement
+		const actions = this._findApplicableActions();
+		actions.length && this._execute(actions[0]);
+
+		return actions.length != 0;
 	}
 
-	expecuteAll() {
-		// TODO: Implement
+	executeAll() {
+		while (this.executeStep());
 	}
 
-	_findApplicableRules() {
-		return this.rules.map(this._evaluateRule);
+	_findApplicableActions() {
+		return this.rules.reduce((acc, rule) => acc.concat(this._evaluateRule(rule)), []);
 	}
 
 	_evaluateRule(rule) {
-		const bindings = [];
-		if (!this._findBindings(bindings, rule.if))
-			return;
-		const combined = this._combineBindings(bindings);
+		const {success, bindings, special} = this._findBindings(rule.if);
+		
+		if (!success)
+			return [];
+		
+		const combinedBindings = this._combineBindings(bindings);
+		const finalBindings = this._applySpecialRules(combinedBindings, special);
+		return this._generate(rule.name, rule.then, finalBindings);
 	}
 
-	_findBindings(bindings, conditions) {
-		return conditions.every(cond => {
+	_findBindings(conditions) {
+		const result = {success: true, bindings: [], special: []};
+		result.success = conditions.every(cond => {
 			switch (cond.type()) {
 				case Condition.types.special:
+					result.special.push(cond.specialMatch());
 					return true;
 				case Condition.types.exact:
 					return this._exactMatch(cond);
 				case Condition.types.predicate:
 					const condBinds = this._predicateMatch(cond);
-					if (condBinds.length) bindings.push(condBinds);
+					if (condBinds.length) result.bindings.push(condBinds);
 					return condBinds.length > 0;
 			}
 		});
+		return result;
 	}
 
 	_exactMatch(cond) {
@@ -72,6 +83,60 @@ class ProductionSystem {
 				}, []));
 			}, []);
 		}, first);
+	}
+
+	_applySpecialRules(bindings, rules) {
+		return bindings.filter(bind => {
+			return rules.every(rule => {
+				const vars = rule.variables.map(key => bind[key]);
+				return (vars.length == 0 && rule.constants[0] != rule.constants[1]) ||
+					(vars.length == 1 && vars[0] != null && vars[0] != rule.constants[0]) ||
+					(vars[0] != null && vars[1] != null && vars[0] != vars[1]);
+			});
+		});
+	}
+
+	_generate(name, actions, bindings) {
+		return bindings.reduce((result, binding) => {
+			const {success, evalActions} = actions.reduce((acc, action) => {
+				const evalAction = action.evaluate(binding);
+				acc.success = acc.success || this._actionChangesMemory(evalAction);
+				acc.evalActions.push(evalAction);
+				
+				return acc;
+			}, {success: false, evalActions: []});
+
+			if (success) result.push({name, actions: evalActions});
+			return result;
+		}, []);
+	}
+
+	_actionChangesMemory(action) {
+		switch (action.type) {
+			case Action.types.add:
+				return !this.memory.includes(action.content);
+			case Action.types.delete:
+				return this.memory.includes(action.content);
+			default:
+				return false;
+		}
+	}
+
+	_execute(actionGroup) {
+		actionGroup.actions.forEach(action => {
+			switch (action.type) {
+				case Action.types.add:
+					if (!this.memory.includes(action.content))
+						this.memory.push(action.content);
+					break;
+				case Action.types.delete:
+					this.memory = this.memory.filter(fact => fact != action.content);
+					break;
+				case Action.types.message:
+					this.output.push(action.content);
+					break;
+			}
+		});
 	}
 }
 
