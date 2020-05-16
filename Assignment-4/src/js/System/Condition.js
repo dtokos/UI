@@ -26,7 +26,12 @@ class Condition {
 		if (values == null || values.length == 0 || values.length != this.variables.length)
 			return null;
 
+		let keyWithDifferentValues = false;
 		return this.variables.reduce((obj, v, i) => {
+			keyWithDifferentValues = keyWithDifferentValues || (obj[v] != null && obj[v] != values[i]);
+			
+			if (keyWithDifferentValues) return null;
+			
 			obj[v] = values[i];
 			return obj;
 		}, {});

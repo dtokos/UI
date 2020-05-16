@@ -56,6 +56,14 @@ describe('Condition', () => {
 		it('should return null when it doesnt match', () => {
 			assert.equal(new Condition('?X is less than ?Y').predicateMatch('foo bar'), null);
 		});
+
+		it('should return object with variables when duplicate keys have same values', () => {
+			assert.deepEqual(new Condition('?X plus ?Y equals ?X').predicateMatch('5 plus 0 equals 5'), {X: 5, Y: 0});
+		});
+
+		it('should return null when duplicate keys have different values', () => {
+			assert.deepEqual(new Condition('?X plus ?Y equals ?X').predicateMatch('5 plus 1 equals 6'), null);
+		});
 	});
 
 	describe('specialMatch()', () => {
