@@ -28,6 +28,9 @@ class ProductionSystem {
 		
 		if (!success)
 			return [];
+
+		if (bindings.length == 0)
+			return this._generate(rule.name, rule.then, [{}]);
 		
 		const combinedBindings = this._combineBindings(bindings);
 		const finalBindings = this._applySpecialRules(combinedBindings, special);
