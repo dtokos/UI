@@ -23,6 +23,7 @@ class ProductionSystem {
 		const bindings = [];
 		if (!this._findBindings(bindings, rule.if))
 			return;
+		const combined = this._combineBindings(bindings);
 	}
 
 	_findBindings(bindings, conditions) {
@@ -51,6 +52,26 @@ class ProductionSystem {
 				matches.push(binds);
 			return matches;
 		}, []);
+	}
+
+	_combineBindings(bindings) {
+		if (bindings.length == 0) return [];
+		else if (bindings.length == 1) return bindings[0];
+
+		const [first, ...rest] = bindings;
+
+		return rest.reduce((comb, bindings) => {
+			return bindings.reduce((newComb, binding) => {
+				return newComb.concat(comb.reduce((newBindings, c) => {
+					const keys = new Set(Object.keys(c));
+
+					if (!Object.keys(binding).some(bKey => keys.has(bKey) && c[bKey] != binding[bKey]))
+						newBindings.push({...c, ...binding});
+
+					return newBindings;
+				}, []));
+			}, []);
+		}, first);
 	}
 }
 
