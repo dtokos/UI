@@ -20,17 +20,14 @@ class ProductionSystem {
 	}
 
 	_findApplicableActions() {
-		return this.rules.reduce((acc, rule) => acc.concat(this._evaluateRule(rule)), []);
+		return this.rules.reduce((acc, rule) => acc.concat(this._findActionsForRule(rule)), []);
 	}
 
-	_evaluateRule(rule) {
+	_findActionsForRule(rule) {
 		const {success, bindings, special} = this._findBindings(rule.if);
 		
-		if (!success)
-			return [];
-
-		if (bindings.length == 0)
-			return this._generate(rule.name, rule.then, [{}]);
+		if (!success) return [];
+		else if (bindings.length == 0) return this._generate(rule.name, rule.then, [{}]);
 		
 		const combinedBindings = this._combineBindings(bindings);
 		const finalBindings = this._applySpecialRules(combinedBindings, special);
