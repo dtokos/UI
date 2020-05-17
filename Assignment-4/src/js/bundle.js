@@ -1,3 +1,4 @@
-import $ from 'jquery';
-import 'bootstrap';
-import './main';
+require('jquery');
+require('bootstrap');
+require('bs-custom-file-input').init();
+require('./main');

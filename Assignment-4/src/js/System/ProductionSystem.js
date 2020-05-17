@@ -3,8 +3,14 @@ import Action from './Action';
 
 class ProductionSystem {
 	constructor(memory = [], rules = []) {
-		this.memory = memory;
-		this.rules = rules;
+		this.memory = [...memory];
+		this.rules = [...rules];
+		this.output = [];
+	}
+
+	setProgram(program) {
+		this.memory = [...program.facts];
+		this.rules = [...program.rules];
 		this.output = [];
 	}
 

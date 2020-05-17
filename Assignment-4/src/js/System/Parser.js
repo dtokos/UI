@@ -1,6 +1,6 @@
-import isString from 'lodash/isstring';
-import isArray from 'lodash/isarray';
-import isObject from 'lodash/isobject';
+import isString from 'lodash/isString';
+import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
 
 import Rule from './Rule';
 import Condition from './Condition';

@@ -1,7 +1,5 @@
 {
     "/dist/js/bundle.js": "/dist/js/bundle.js",
     "/dist/css/bundle.css": "/dist/css/bundle.css",
-    "/dist/index.html": "/dist/index.html",
-    "/dist/js/bundle.ef6b204ad350dd93b211.hot-update.js": "/dist/js/bundle.ef6b204ad350dd93b211.hot-update.js",
-    "/dist/js/bundle.291bb999c2cbf61ce2f2.hot-update.js": "/dist/js/bundle.291bb999c2cbf61ce2f2.hot-update.js"
+    "/dist/index.html": "/dist/index.html"
 }
