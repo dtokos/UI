@@ -1,0 +1,48 @@
+{
+    "facts": ["fibonacci 7"],
+    "rules": [
+        {
+            "name": "Fi1",
+            "if": ["fibonacci 1"],
+            "then": [
+                {"type": "delete", "content": "fibonacci 1"},
+                {"type": "add", "content": "fibonacci 1 je 1"},
+                {"type": "message", "content": "fibonacci 1 je 1"}
+            ]
+        },
+        {
+            "name": "Fi2",
+            "if": ["fibonacci 2"],
+            "then": [
+                {"type": "delete", "content": "fibonacci 2"},
+                {"type": "add", "content": "fibonacci 2 je 1"},
+                {"type": "message", "content": "fibonacci 2 je 1"}
+            ]
+        },
+        {
+            "name": "Fi3",
+            "if": ["fibonacci ?x", "<> ?x 1", "<> ?x 2"],
+            "then": [
+                {"type": "delete", "content": "fibonacci ?x"},
+                {"type": "add", "content": "medzivypocet ?x 1 2 3"}
+            ]
+        },
+        {
+            "name": "Fi4",
+            "if": ["medzivypocet ?x ?y ?z ?x"],
+            "then": [
+                {"type": "delete", "content": "medzivypocet ?x ?y ?z ?x"},
+                {"type": "add", "content": "fibonacci ?x je ?z"},
+                {"type": "message", "content": "fibonacci ?x je ?z"}
+            ]
+        },
+        {
+            "name": "Fi5",
+            "if": ["medzivypocet ?x ?y ?z ?u"],
+            "then": [
+                {"type": "delete", "content": "medzivypocet ?x ?y ?z ?u"},
+                {"type": "add", "content": "medzivypocet ?x ?z { ?y + ?z } { ?u + 1 }"}
+            ]
+        }
+    ]
+}

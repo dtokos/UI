@@ -24,7 +24,7 @@ describe('ProductionSystem - FamilyScenario', () => {
 	];
 	const finalOutput = ['Maria ma stryka', 'Viera ma stryka'];
 	const origRules = [
-		new Rule('Druhyrodič1', [new Condition('?X je rodič ?Y'), new Condition('manželia ?X ?Z'), new Condition('žena ?A')], [new Action(Action.types.add, '?Z je rodič ?Y')]),
+		new Rule('Druhyrodič1', [new Condition('?X je rodič ?Y'), new Condition('manželia ?X ?Z')], [new Action(Action.types.add, '?Z je rodič ?Y')]),
 		new Rule('Druhyrodič2', [new Condition('?X je rodič ?Y'), new Condition('manželia ?Z ?X')], [new Action(Action.types.add, '?Z je rodič ?Y')]),
 		new Rule('Otec', [new Condition('?X je rodič ?Y'), new Condition('muž ?X')], [new Action(Action.types.add, '?X je otec ?Y')]),
 		new Rule('Matka', [new Condition('?X je rodič ?Y'), new Condition('žena ?X')], [new Action(Action.types.add, '?X je matka ?Y')]),

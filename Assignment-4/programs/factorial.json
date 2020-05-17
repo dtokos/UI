@@ -1,0 +1,39 @@
+{
+    "facts": ["faktorial 5"],
+    "rules": [
+        {
+            "name": "F1",
+            "if": ["faktorial 0"],
+            "then": [
+                {"type": "delete", "content": "faktorial 0"},
+                {"type": "add", "content": "faktorial 0 je 1"},
+                {"type": "message", "content": "Faktorial 0 je 1"}
+            ]
+        },
+        {
+            "name": "F2",
+            "if": ["faktorial ?x", "<> ?x 0"],
+            "then": [
+                {"type": "delete", "content": "faktorial ?x"},
+                {"type": "add", "content": "medzivypocet ?x { ?x - 1 } ?x"}
+            ]
+        },
+        {
+            "name": "F3",
+            "if": ["medzivypocet ?x 0 ?y"],
+            "then": [
+                {"type": "delete", "content": "medzivypocet ?x 0 ?y"},
+                {"type": "add", "content": "faktorial ?x je ?y"},
+                {"type": "message", "content": "Faktorial ?x je ?y"}
+            ]
+        },
+        {
+            "name": "F4",
+            "if": ["medzivypocet ?x ?y ?z"],
+            "then": [
+                {"type": "delete", "content": "medzivypocet ?x ?y ?z"},
+                {"type": "add", "content": "medzivypocet ?x { ?y - 1 } { ?y * ?z }"}
+            ]
+        }
+    ]
+}

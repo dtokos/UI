@@ -1,0 +1,140 @@
+{
+    "facts": [
+        "typ karoserie sedan",
+        "pocet dveri 4",
+        "pohanana naprava predna",
+        "predna maska mriezka",
+        "ma okruhle svetla"
+    ],
+    "rules": [
+        {
+            "name": "FIAT1",
+            "if": ["typ karoserie ?sedan_hatchback"],
+            "then": [
+                {"type": "add", "content": "karoseria ?sedan_hatchback"}
+            ]
+        },
+        {
+            "name": "FIAT2",
+            "if": ["karoseria sedan", "pocet dveri ?4_5"],
+            "then": [
+                {"type": "add", "content": "sedan ?4_5"}
+            ]
+        },
+        {
+            "name": "FIAT3",
+            "if": ["sedan 5"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Croma"},
+                {"type": "message", "content": "Fiat Croma"}
+            ]
+        },
+        {
+            "name": "FIAT4",
+            "if": ["sedan 4", "pohanana naprava ?predna_zadna"],
+            "then": [
+                {"type": "add", "content": "naprava ?predna_zadna"}
+            ]
+        },
+        {
+            "name": "FIAT5",
+            "if": ["naprava predna"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Tempra"},
+                {"type": "message", "content": "Fiat Tempra"}
+            ]
+        },
+        {
+            "name": "FIAT6",
+            "if": ["naprava zadna"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Mirafiorri"},
+                {"type": "message", "content": "Fiat Mirafiorri"}
+            ]
+        },
+        {
+            "name": "FIAT7",
+            "if": ["karoseria hatchback", "pocet dveri ?3alebo5"],
+            "then": [
+                {"type": "add", "content": "hatchback ?3alebo5"}
+            ]
+        },
+        {
+            "name": "FIAT8",
+            "if": ["hatchback 3", "predna maska ?ano_nie_mriezka"],
+            "then": [
+                {"type": "add", "content": "3 maska ?ano_nie_mriezka"}
+            ]
+        },
+        {
+            "name": "FIAT9",
+            "if": ["3 maska ano"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Tipo3"},
+                {"type": "message", "content": "Fiat Tipo3"}
+            ]
+        },
+        {
+            "name": "FIAT10",
+            "if": ["3 maska nie"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Punto3"},
+                {"type": "message", "content": "Fiat Punto3"}
+            ]
+        },
+        {
+            "name": "FIAT11",
+            "if": ["3 maska mriezka"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Panda3"},
+                {"type": "message", "content": "Fiat Panda3"}
+            ]
+        },
+        {
+            "name": "FIAT12",
+            "if": ["hatchback 5", "predna maska ?ano_nie_mriezka"],
+            "then": [
+                {"type": "add", "content": "5 maska ?ano_nie_mriezka"}
+            ]
+        },
+        {
+            "name": "FIAT13",
+            "if": ["5 maska ano"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Tipo5"},
+                {"type": "message", "content": "Fiat Tipo5"}
+            ]
+        },
+        {
+            "name": "FIAT14",
+            "if": ["5 maska nie"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Punto5"},
+                {"type": "message", "content": "Fiat Punto5"}
+            ]
+        },
+        {
+            "name": "FIAT15",
+            "if": ["5 maska mriezka", "ma ?okruhle_integrovane svetla"],
+            "then": [
+                {"type": "add", "content": "?okruhle_integrovane svetla"}
+            ]
+        },
+        {
+            "name": "FIAT16",
+            "if": ["integrovane svetla"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Uno5"},
+                {"type": "message", "content": "Fiat Uno5"}
+            ]
+        },
+        {
+            "name": "FIAT17",
+            "if": ["okruhle svetla"],
+            "then": [
+                {"type": "add", "content": "vybrany Fiat Ritmo5"},
+                {"type": "message", "content": "Fiat Ritmo5"}
+            ]
+        }
+    ]
+}

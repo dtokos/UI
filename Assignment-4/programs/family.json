@@ -1,0 +1,74 @@
+{
+    "facts": [
+        "Peter je rodič Jano",
+        "Peter je rodič Vlado",
+        "manželia Peter Eva",
+        "Vlado je rodič Maria",
+        "Vlado je rodič Viera",
+        "muž Peter",
+        "muž Jano",
+        "muž Vlado",
+        "žena Maria",
+        "žena Viera",
+        "žena Eva"
+    ],
+    "rules": [
+        {
+            "name": "Druhyrodič1",
+            "if": ["?X je rodič ?Y", "manželia ?X ?Z"],
+            "then": [
+                {"type": "add", "content": "?Z je rodič ?Y"}
+            ]
+        },
+        {
+            "name": "Druhyrodič2",
+            "if": ["?X je rodič ?Y", "manželia ?Z ?X"],
+            "then": [
+                {"type": "add", "content": "?Z je rodič ?Y"}
+            ]
+        },
+        {
+            "name": "Otec",
+            "if": ["?X je rodič ?Y", "muž ?X"],
+            "then": [
+                {"type": "add", "content": "?X je otec ?Y"}
+            ]
+        },
+        {
+            "name": "Matka",
+            "if": ["?X je rodič ?Y", "žena ?X"],
+            "then": [
+                {"type": "add", "content": "?X je matka ?Y"}
+            ]
+        },
+        {
+            "name": "Surodenci",
+            "if": ["?X je rodič ?Y", "?X je rodič ?Z", "<> ?Y ?Z"],
+            "then": [
+                {"type": "add", "content": "?Y a ?Z su surodenci"}
+            ]
+        },
+        {
+            "name": "Brat",
+            "if": ["?Y a ?Z su surodenci", "muž ?Y"],
+            "then": [
+                {"type": "add", "content": "?Y je brat ?Z"}
+            ]
+        },
+        {
+            "name": "Stryko",
+            "if": ["?Y je brat ?Z", "?Z je rodič ?X"],
+            "then": [
+                {"type": "add", "content": "?Y je stryko ?X"},
+                {"type": "message", "content": "?X ma stryka"}
+            ]
+        },
+        {
+            "name": "Test mazania",
+            "if": ["?Y je stryko ?X", "žena ?X"],
+            "then": [
+                {"type": "delete", "content": "žena ?X"}
+            ]
+        }
+    ]
+}

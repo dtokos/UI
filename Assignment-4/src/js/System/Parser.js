@@ -66,7 +66,15 @@ class Parser {
 		cond = cond.trim();
 		if (cond.length == 0) throw new Error('Rule if must not be empty');
 
+		if (cond.startsWith('<>')) this._checkSpecialOperands(cond);
+
 		return new Condition(cond);
+	}
+
+	_checkSpecialOperands(cond) {
+		const {variables, constants} = new Condition(cond).specialMatch();
+		const nOps = variables.length + constants.length;
+		if (nOps != 2) throw new Error(`Rule ifs special must contain 2 operands, ${nOps} were given: ${cond}`);
 	}
 	
 	_parseAction(act) {
